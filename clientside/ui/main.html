@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<div class="arch-div">
+			<div class="main-collum" id="collum-1">
+				<div class="signal" id="opp-signal">
+					<div class="opp inner-div">
+						<p id="opp-signal-meter"></p>
+					</div>
+				</div>
+				<div class="orbit" id="opp-orbit">
+					<div class="opp inner-div">
+
+					</div>
+				</div>
+				<div class="orbit" id="my-orbit">
+					<div class="my inner-div">
+
+					</div>
+				</div>
+				<div class="signal" id="my-signal">
+					<div class="my inner-div">
+						<p id="my-signal-meter"></p>
+					</div>
+				</div>
+			</div>
+			<div class="main-collum" id="collum-2">
+				<div class="hand" id="opp-hand">
+					<div class="opp inner-div">
+
+					</div>
+				</div>
+				<div class="board" id="main-board">
+					<div class="inner-div" id="board-inner">
+						<iframe src="grid.html" frameborder="0"></iframe>
+					</div>
+				</div>
+				<div class="hand" id="my-hand">
+					<div class="my inner-div">
+
+					</div>
+				</div>
+			</div>
+			<div class="main-collum" id="collum-3">
+				<div class="hell" id="opp-hell">
+					<div class="opp inner-div">
+
+					</div>
+				</div>
+				<div class="stasis" id="opp-stasis">
+					<div class="opp inner-div">
+
+					</div>
+				</div>
+				<div class="stasis" id="my-stasis">
+					<div class="my inner-div">
+						
+					</div>
+				</div>
+				<div class="hell" id="my-hell">
+					<div class="my inner-div">
+
+					</div>
+				</div>
+			</div>
+			<div class="main-collum" id="collum-4">
+				<div class="menu" id="chat">
+					<iframe src="chat.html" frameborder="0" id="chat-embed"></iframe>
+				</div>
+				<div class="menu" id="settings">
+					settings
+				</div>
+				<div class="menu" id="rules">
+					rules
+				</div>
+				<div class="menu" id="quit">
+					quit
+				</div>
+			</div>
+			<div class="main-collum" id="collum-5">
+				<div class="button-container">
+					<button type="button" class="sidebar-button" id="chat-button">chat / commands</button>
+				</div>
+				<div class="button-container">
+					<button type="button" class="sidebar-button" id="settings-button">settings</button>
+				</div>
+				<div class="button-container">
+					<button type="button" class="sidebar-button" id="rules-button">rules</button>
+				</div>
+				<div class="button-container">
+					<button type="button" class="sidebar-button" id="quit-button">concede</button>
+				</div>
+				
+			</div>
+		</div>
+		<script>
+			const menus = document.getElementsByClassName("menu")
+			const chatBtn = document.getElementById("chat-button")
+			const chatMenu = document.getElementById("chat")
+			const settBtn = document.getElementById("settings-button")
+			const settMenu = document.getElementById("settings")
+			const ruleBtn = document.getElementById("rules-button")
+			const ruleMenu = document.getElementById("rules")
+			const quitBtn = document.getElementById("quit-button")
+			const quitMenu = document.getElementById("quit")
+			
+
+			function clearMenus() {
+				for(let pt = 0; pt < menus.length; pt++) {
+					menus[pt].classList.remove("opened")
+				}
+			}
+		
+			chatBtn.addEventListener("click", () => {
+				clearMenus()
+				chatMenu.classList.add("opened")
+			}, false)
+		
+			settBtn.addEventListener("click", () => {
+				clearMenus()
+				settMenu.classList.add("opened")
+			}, false)
+
+			ruleBtn.addEventListener("click", () => {
+				clearMenus()
+				ruleMenu.classList.add("opened")
+			}, false)
+		
+			quitBtn.addEventListener("click", () => {
+				clearMenus()
+				quitMenu.classList.add("opened")
+			}, false)
+		</script>
+	</body>
+</html>

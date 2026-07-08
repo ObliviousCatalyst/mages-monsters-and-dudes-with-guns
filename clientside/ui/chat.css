@@ -1,0 +1,28 @@
+html, body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.logs {
+	flex: 100;
+	overflow: hidden;
+	vertical-align: bottom;
+}
+
+#log-container {
+	flex: 1;
+	height: 90%;
+	align-content: flex-end;
+}
+
+#input-container {
+	height: 10%;
+	width: 100%;
+}
+
+p {
+	color: white;
+}

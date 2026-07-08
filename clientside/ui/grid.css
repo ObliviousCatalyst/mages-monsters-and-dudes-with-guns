@@ -1,0 +1,33 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-grow: 1;
+	margin: 0%;
+	flex-shrink: 1;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(9,1fr);
+	grid-template-rows: repeat(9,1fr);
+	gap: 2%;
+	align-items: start;
+	width: 100%;
+	height: 100%;
+	flex: 1;
+}
+
+.grid-space {
+	background-color: lightsteelblue;
+	border-color: white;
+	font-family: fira-code;
+	width: 100%;
+	height: 100%;
+
+}
+
+@font-face {
+	font-family: fira-code;
+	src: url(../../fonts/Fira_Code/FiraCode-VariableFont_wght.ttf);
+}

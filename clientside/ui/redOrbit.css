@@ -1,0 +1,42 @@
+.orbit {
+	grid-template-columns: repeat(8,1fr);
+	display: grid;
+	gap: 10px;
+	grid-template-areas: 
+	"o1 o2"
+	"o3 o4"
+	"o5 o6";
+	align-items: start;
+	background-color: black;
+	padding: 10px;
+}
+
+.orbit-space {
+	background-color: red;
+	width: 50px;
+	height: 50px;
+}
+
+#o1 {
+	grid-area: o1;
+}
+
+#o2 {
+	grid-area: o2;
+}
+
+#o3 {
+	grid-area: o3;
+}
+
+#o4 {
+	grid-area: o4;
+}
+
+#o5 {
+	grid-area: o5;
+}
+
+#o6 {
+	grid-area: o6;
+}
