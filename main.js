@@ -2,8 +2,6 @@ import { BrowserWindow , app , ipcMain } from 'electron'
 import path from "node:path"
 import { fork } from "node:child_process"
 
-//import * as web from "./web.js"
-import * as obj from "./classes/key-objects.js"
 const __dirname = import.meta.dirname
 
 const serverProcess = fork("./web.js")
@@ -32,10 +30,10 @@ ipcMain.on("start",(event,val) => {
 	console.log(val)
 	//server = web.launchServer(val)
 	serverProcess.send(["start_server",val])
-	users = new obj.userlist()
-	users.addHost("host")
+	
+	//users.addHost("host")
 })
 
 serverProcess.on("message", (msg) => {
-	console.log(msg)
+	
 })

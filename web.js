@@ -1,94 +1,49 @@
 import http from "node:http";
 import fs from "node:fs";
 import url from "node:url";
-import process from "node:process";
 import { json } from "node:stream/consumers";
 import { WebSocketServer as wssv } from "ws";
+//import EventEmitter from "node:events";
+import * as keyClass from "./classes/key-objects.js"
+//const signalar = new EventEmitter()
 
 process.on("message", (msg) => {
 	if(msg[0] == "start_server") {
 		launchServer(msg[1])
 	}
+	//signalar.emit()
 })
 
 function launchServer (port) {
-	const mainHtml = fs.readFileSync("./clientside/ui/main.html", (err,file) => {
-		if (err) {
-			throw err;
+	const files = {
+		main: {
+			html: fs.readFileSync("./clientside/ui/main.html"),
+			css: fs.readFileSync("./clientside/ui/main.css"),
+		},
+		grid: {
+			html: fs.readFileSync("./clientside/ui/grid.html"),
+			css: fs.readFileSync("./clientside/ui/grid.css"),
+		},
+		chat: {
+			html: fs.readFileSync("./clientside/ui/chat.html"), 
+			css: fs.readFileSync("./clientside/ui/chat.css"), 
+			js: fs.readFileSync("./clientside/ui/chat.js")
+		},
+		orbit: {
+			html: fs.readFileSync("./clientside/ui/orbit.html"),
+			redCss: fs.readFileSync("./clientside/ui/redOrbit.css")
+		},
+		fonts: {
+			firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf")
 		}
-		return file;
-	});
-
-	const gridHtml = fs.readFileSync("./clientside/ui/grid.html", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const orbitHtml = fs.readFileSync("./clientside/ui/orbit.html", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const chatHtml = fs.readFileSync("./clientside/ui/chat.html", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
+	}
 	
-	const mainCss = fs.readFileSync("./clientside/ui/main.css", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const gridCss = fs.readFileSync("./clientside/ui/grid.css", (err,file) => {
-		if(err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const redOrbitCss = fs.readFileSync("./clientside/ui/redOrbit.css", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const chatCss = fs.readFileSync("./clientside/ui/chat.css", (err,file) => {
-		if(err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const chatJs = fs.readFileSync("./clientside/ui/chat.js", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
-	const firaCode = fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf", (err, file) => {
-		if (err) {
-			throw err;
-		}
-		return file;
-	});
-
 	const IP = "127.0.0.1";
-
 	const chatlogs = [["this is a username","this is the message"]]
+	
+	const users = new keyClass.userlist()
 
 	const server = http.createServer();
-
-	console.log(wssv)
 
 	const sockets = {
 		public: new wssv({ noServer: true }),
@@ -96,130 +51,155 @@ function launchServer (port) {
 		blue: new wssv({ noServer: true }),
 	}
 	
-	sockets.public.handleUpgrade()
+	function checkExistance(ip, username) {
+		function checkProperty(key, value) {
+			let playerEmpty = false
+			let specEmpty = false
+			if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { playerEmpty = true }
+			if (users.spectators === []) { specEmpty = true }
+			if (playerEmpty && specEmpty) {
+				return false
+			}
+			if (value === users.players.red[key] || value === users.players.blue[key]) {
+				return true
+			}
+			for (let pt = 0; pt < users.spectators; pt++) {
+				if (value === users.spectators[pt][key]) {
+					return true
+				}
+			}
+			return false
+		}
+		if (typeof username === "string") {
+			if (checkProperty("username",username)) {
+				return true
+			}
+		}
+		if (checkProperty("ip",ip)) {
+			return true
+		}
+	}
 
-	server.on("request", (req, res) => {
-		console.log(req.url)
+	server.on("request", async (req, res) => {
+		
 		let parsed = req.url.split("/")
-		console.log(parsed)
 		if (parsed[0] === "") {
 			parsed.shift()
 		}
 		switch (parsed[0]) {
 			case "":
 				res.setHeader("Content-type", "text/html");
-				res.write(mainHtml);
-				res.end()
+				res.write(files.main.html);
 			break;
 
 			case "grid.html":
 				res.setHeader("Content-type", "text/html");
-				res.write(gridHtml);
-				res.end()
+				res.write(files.grid.html);
 			break;
 
 			case "orbit.html":
 				res.setHeader("Content-type", "text/html");
-				res.write(orbitHtml);
-				res.end()
+				res.write(files.orbit.html);
 			break;
 
 			case "chat.html":
 				res.setHeader("Content-type", "text/html");
-				res.write(chatHtml);
-				res.end()
+				res.write(files.chat.html);
 			break;
 
 			case "main.css":
 				res.setHeader("Content-type", "text/css");
-				res.write(mainCss);
-				res.end()
+				res.write(files.main.css);
 			break;
 
 			case "grid.css":
 				res.setHeader("Content-type", "text/css");
-				res.write(gridCss);
-				res.end()
+				res.write(files.grid.css);
 			break;
 
 			case "redOrbit.css":
 				res.setHeader("Content-type", "text/css");
-				res.write(redOrbitCss);
-				res.end()
+				res.write(files.orbit.redCss);
+
 			break;
 
 			case "chat.css":
 				res.setHeader("Content-type", "text/css");
-				res.write(chatCss);
-				res.end()
+				res.write(files.chat.css);
+
 			break;
 
 			case "chat.js":
 				res.setHeader("Content-type", "text/javascript")
-				res.write(chatJs)
-				res.end()
+				res.write(files.chat.js)
 			break;
 
-			case "chat":
-				if (req.socket.remoteAddress) {
-					console.log(chatlogs)
-					console.log(JSON.stringify(chatlogs))
-					let data = JSON.stringify(chatlogs)
-					res.setHeader("Content-type", "text/plain")
-					res.write(data)
-					res.end()
-				}
 			break;
 
 			case "fira_Code":
 				res.setHeader("Content-type", "font/ttf")
-				res.write(firaCode)
-				res.end()
+				res.write(files.fonts.firaCode)
 			break;
 
-			case "send":
-				switch (parsed[1]) {
-					case "chatMessage":
-						chatlogs.push(parsed[2])
-					break;
+			case "createUser":
+				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
+					res.statusCode = 403
+					res.write("text/plain", "utf-8", "error: player object with specified properties already exists")
+					break
 				}
-				res.setHeader("Content-type", "text/plain")
-				res.end("user output recieved")
+				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
+				res.statusCode = 201
+				res.write("text/plain","utf-8","player object was created")
 			break;
-
-			// case "sockets":
-			// 	switch(parsed[1]) {
-			// 		case "public":
-			// 			sockets.public.handelUpgrade(req)
-			// 		break;
-			// 	}
-			// break;
 		}
 		res.end()
 	})
 
 	// i know naming your variables a single letter is bad practice but i cannot be fucked to come up with actual names right now
-	sockets.public.on("connection", (v) => {
+	sockets.public.on("connection", (v,req) => {
 		console.log("connected to public socket")
-		function writeMessage(type, subtype, data, callback) {
-			class outgoingMessage {
-				constructor() {
-					this.type = type
-					this.subtype = subtype
-					this.data = data
-				}
-			}
-			let temp = new outgoingMessage
-			if(typeof callback === "function") {
-				callback()
+		function writeMessage(type, subtype, data) {
+			let temp = {
+				type: type,
+				subtype: subtype,
+				data: data
 			}
 			return JSON.stringify(temp)
 		}
 		
-
-		v.send(writeMessage("update", "chatlogs" ,chatlogs, () => console.log("generated chatlog update")))
+		let initChat = writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update"))
+		v.send(initChat)
 		v.on("message", (msg) => {
-			v.send(`echo: ${msg}`)
+			console.log(msg)
+			let parsed = JSON.parse(msg)
+
+			function echo() {
+				v.send(writeMessage("echo","none",parsed))
+			}
+
+			switch(parsed.type) {
+				case "chat":
+					switch(parsed.subtype) {
+						case "message":
+
+						break
+					}
+				break;
+
+				case "create user":
+					process.send({
+						type: "user req",
+						subtype: "create",
+						data: {
+							ip: req.socket.remoteAddress
+						}
+						
+
+					})
+						
+					
+				break;
+			}
 		})
 	})
 	

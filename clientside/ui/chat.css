@@ -16,6 +16,7 @@ html, body {
 	flex: 1;
 	height: 90%;
 	align-content: flex-end;
+	color: white;
 }
 
 #input-container {
@@ -24,5 +25,9 @@ html, body {
 }
 
 p {
+	color: white;
+}
+
+.temp-chat-div {
 	color: white;
 }

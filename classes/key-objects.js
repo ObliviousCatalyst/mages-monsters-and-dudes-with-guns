@@ -53,15 +53,15 @@ class hand {
 export class userlist {
 	constructor() {
 		this.spectators = []
-		this.players = {}
+		this.players = {red,blue}
 	}
 
-	addSpectator(username) {
-		this.spectators.push(new user.spectator(username))
+	addSpectator(username,ip) {
+		this.spectators.push(new user.spectator(username,ip))
 	}
 
-	addPlayer(username,team){
-		this.players[team] = new user.player(username)
+	addPlayer(username,ip,team){
+		this.players[team] = new user.player(username,ip)
 	}
 
 	addHost(username) {
