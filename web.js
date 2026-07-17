@@ -18,6 +18,7 @@ function launchServer (port) {
 		landing: {
 			html: fs.readFileSync("./clientside/ui/landing.html"),
 			css: fs.readFileSync("./clientside/ui/landing.css"),
+			js: fs.readFileSync("./clientside/ui/landing.js")
 		},
 		error: {
 			html: fs.readFileSync("./clientside/ui/error.html"),
@@ -127,6 +128,11 @@ function launchServer (port) {
 			case "landing.css":
 				res.setHeader("Content-type", "text/css");
 				res.write(files.landing.css)
+			break;
+
+			case "landing.js":
+				res.setHeader("Content-type", "text/js");
+				res.write(files.landing.js)
 			break;
 
 			case "main.css":
