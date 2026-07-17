@@ -163,14 +163,19 @@ function launchServer (port) {
 			break;
 
 			case "createUser":
+				res.writeHead("Content-type", "text/plain")
 				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
 					res.statusCode = 403
-					res.write("text/plain", "utf-8", "error: player object with specified properties already exists")
+					res.write("error: player object with specified properties already exists")
 					break
 				}
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
 				res.statusCode = 201
-				res.write("text/plain","utf-8","player object was created")
+				res.write("player object was created")
+			break;
+
+			default: 
+				res.statusCode = 404;
 			break;
 		}
 		res.end()
