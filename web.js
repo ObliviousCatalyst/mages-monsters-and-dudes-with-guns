@@ -3,10 +3,8 @@ import fs from "node:fs";
 import url from "node:url";
 import { json } from "node:stream/consumers";
 import { WebSocketServer as wssv } from "ws";
-//import EventEmitter from "node:events";
 import * as keyClass from "./classes/key-objects.js"
 import { error } from "node:console";
-//const signalar = new EventEmitter()
 
 process.on("message", (msg) => {
 	if(msg[0] == "start_server") {
@@ -225,8 +223,6 @@ function launchServer (port) {
 			}
 		})
 	})
-	
-	console.log(sockets)
 
 	server.on("upgrade", (req,sock,head) => {
 		let { pathname } = url.parse(req.url)

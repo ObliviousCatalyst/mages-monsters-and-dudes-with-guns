@@ -53,7 +53,10 @@ class hand {
 export class userlist {
 	constructor() {
 		this.spectators = []
-		this.players = {red,blue}
+		this.players = { 
+			red: undefined,
+			blue: undefined,
+		}
 	}
 
 	addSpectator(username,ip) {
