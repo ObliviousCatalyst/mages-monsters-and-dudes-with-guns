@@ -44,7 +44,7 @@ function launchServer (port) {
 		}
 	}
 	
-	const IP = "127.0.0.1";
+	const IP = "0.0.0.0";
 	const chatlogs = [["this is a username","this is the message", "orange"]]
 	
 	const users = new keyClass.userlist()
