@@ -1,5 +1,5 @@
 @font-face {
-	font-family: fira code;
+	font-family: fira-code;
 	src: url(fira_Code);
 }
 
@@ -129,7 +129,7 @@ iframe {
 .sidebar-button {
 	flex: 1;
 	font-size: 100%;
-	font-family: fira code;
+	font-family: fira-code;
 	background-color: black;
 	color: white;
 	border-color: white;

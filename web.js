@@ -45,7 +45,7 @@ function launchServer (port) {
 	}
 	
 	const IP = "127.0.0.1";
-	const chatlogs = [["this is a username","this is the message"]]
+	const chatlogs = [["this is a username","this is the message", "orange"]]
 	
 	const users = new keyClass.userlist()
 
@@ -234,9 +234,12 @@ function launchServer (port) {
 							if(userid !== "none") {
 								let usrArr = userid.split(":")
 								if (usrArr[0] === "player") {
-									chatlogs.push([users.players[usrArr[1]].username,parsed.data])
-									v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+									chatlogs.push([users.players[usrArr[1]].username,parsed.data,usrArr[1]])
 								}
+								if (usrArr[0] === "spectator") {
+									chatlogs.push([users.players[usrArr[1]].username, parsed.data])
+								}
+								v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
 							}
 						break;
 					}

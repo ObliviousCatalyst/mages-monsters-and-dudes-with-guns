@@ -1,9 +1,15 @@
+@font-face {
+	font-family: fira-code;
+	src: url(fira_Code);
+}
+
 html, body {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	height: 100%;
 	width: 100%;
+	font-family: fira-code;
 }
 
 .logs {
@@ -30,4 +36,11 @@ p {
 
 .temp-chat-div {
 	color: white;
+}
+
+.msg-cont {
+	display: flex;
+	flex: 1;
+	flex-direction: row;
+	font-family: fira-code;
 }

@@ -1,3 +1,8 @@
+@font-face {
+	font-family: fira-code;
+	src: url(fira_Code);
+}
+
 html, body {
 	height: 100%;
 	width: 100%;
@@ -25,9 +30,4 @@ html, body {
 	width: 100%;
 	height: 100%;
 
-}
-
-@font-face {
-	font-family: fira-code;
-	src: url(../../fonts/Fira_Code/FiraCode-VariableFont_wght.ttf);
 }

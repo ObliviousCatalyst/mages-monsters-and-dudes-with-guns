@@ -32,14 +32,24 @@ sockets.public.onmessage = (event) => {
 						let temp = document.createElement("div")
 						let temp1 = document.createElement("p")
 						temp1.classList.add("username")
+
 						let temp2 = document.createElement("p")
 						temp2.classList.add("message")
+
 						temp1.innerText = `${msg.data[pt][0]}:`
 						temp2.innerText = msg.data[pt][1]
+						temp1.style.marginRight = "2%";
+
+						if(msg.data[pt][2]) {
+							temp1.style.color = msg.data[pt][2]
+						}
+
 						console.log(temp1,temp2)
 						temp.appendChild(temp1)
 						temp.appendChild(temp2)
 						console.log(temp)
+						temp.classList.add("msg-cont")
+						
 						div.appendChild(temp)
 					}
 					div.classList.add("temp-chat-div")
