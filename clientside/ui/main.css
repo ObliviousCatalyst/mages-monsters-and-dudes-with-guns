@@ -1,3 +1,8 @@
+@font-face {
+	font-family: fira code;
+	src: url(fira_Code);
+}
+
 html,body {
 	height: 100%;
 	width: 100%;
@@ -149,9 +154,4 @@ iframe {
 	height: 100%;
 	display: flex;
 	flex: 1;
-}
-
-@font-face {
-	font-family: fira code;
-	src: url(fira_Code);
 }

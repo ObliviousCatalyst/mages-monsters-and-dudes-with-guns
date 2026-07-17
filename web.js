@@ -16,6 +16,10 @@ process.on("message", (msg) => {
 
 function launchServer (port) {
 	const files = {
+		landing: {
+			html: fs.readFileSync("./clientside/ui/landing.html"),
+			css: fs.readFileSync("./clientside/ui/landing.css"),
+		},
 		main: {
 			html: fs.readFileSync("./clientside/ui/main.html"),
 			css: fs.readFileSync("./clientside/ui/main.css"),
@@ -27,14 +31,14 @@ function launchServer (port) {
 		chat: {
 			html: fs.readFileSync("./clientside/ui/chat.html"), 
 			css: fs.readFileSync("./clientside/ui/chat.css"), 
-			js: fs.readFileSync("./clientside/ui/chat.js")
+			js: fs.readFileSync("./clientside/ui/chat.js"),
 		},
 		orbit: {
 			html: fs.readFileSync("./clientside/ui/orbit.html"),
-			redCss: fs.readFileSync("./clientside/ui/redOrbit.css")
+			redCss: fs.readFileSync("./clientside/ui/redOrbit.css"),
 		},
 		fonts: {
-			firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf")
+			firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
 		}
 	}
 	
@@ -78,16 +82,22 @@ function launchServer (port) {
 		if (checkProperty("ip",ip)) {
 			return true
 		}
+		return false
 	}
 
 	server.on("request", async (req, res) => {
 		
 		let parsed = req.url.split("/")
-		if (parsed[0] === "") {
+		if (parsed[0] === "" && parsed.length > 1) {
 			parsed.shift()
 		}
 		switch (parsed[0]) {
 			case "":
+				res.setHeader("Content-type", "text/html");
+				res.write(files.landing.html)
+			break;
+			
+			case "main.html":
 				res.setHeader("Content-type", "text/html");
 				res.write(files.main.html);
 			break;
@@ -105,6 +115,11 @@ function launchServer (port) {
 			case "chat.html":
 				res.setHeader("Content-type", "text/html");
 				res.write(files.chat.html);
+			break;
+
+			case "landing.css":
+				res.setHeader("Content-type", "text/css");
+				res.write(files.landing.css)
 			break;
 
 			case "main.css":

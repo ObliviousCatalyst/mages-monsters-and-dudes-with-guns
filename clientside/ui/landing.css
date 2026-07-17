@@ -1,0 +1,22 @@
+@font-face {
+	font-family: fira-code;
+	src: url(fira_Code);
+}
+
+html,body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	font-family: fira-code;
+}
+
+form {
+	width: 100%;
+	height: 50%;
+	align-content: center;
+}
+
+#form-div {
+	display: grid;
+}
+
