@@ -96,11 +96,12 @@ function launchServer (port) {
 		switch (parsed[0]) {
 			case "":
 				res.setHeader("Content-type", "text/html");
-				res.write(files.landing.html)
+				res.write(files.landing.html);
 			break;
 
 			case "error.html":
-
+				res.setHeader("Content-type", "text/html");
+				res.write(files.error.html);
 			break;
 			
 			case "main.html":
