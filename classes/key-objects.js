@@ -54,8 +54,8 @@ export class userlist {
 	constructor() {
 		this.spectators = []
 		this.players = { 
-			red: undefined,
-			blue: undefined,
+			red: {},
+			blue: {},
 		}
 	}
 

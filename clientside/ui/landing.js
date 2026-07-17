@@ -8,7 +8,8 @@ form.addEventListener("submit", (event) => {
 	let v2 = form.children[0].children[3].value
 	console.log(v1)
 	console.log(v2)
-	fetch(`${window.location}/createUser/${v1}/${v2}`).then((res) => {
+	console.log(window.location)
+	fetch(`http://${window.location.host}/createUser/${v1}/${v2}`).then((res) => {
 		if(res.status = 201) {
 			window.location = "/main.html"
 		}

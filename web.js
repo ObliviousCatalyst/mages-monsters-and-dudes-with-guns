@@ -10,7 +10,6 @@ process.on("message", (msg) => {
 	if(msg[0] == "start_server") {
 		launchServer(msg[1])
 	}
-	//signalar.emit()
 })
 
 function launchServer (port) {
@@ -86,6 +85,21 @@ function launchServer (port) {
 			return true
 		}
 		return false
+	}
+
+	function checkIP (ip) {
+		if (ip === users.players.red.ip) {
+			return "player:red"
+		}
+		if (ip === users.players.blue.ip) {
+			return "player:blue"
+		}
+		for (let pt = 0; pt < users.spectators; pt++) {
+			if (ip === users.spectators[pt].ip) {
+				return `spectator:${pt}`
+			}
+		}
+		return "none"
 	}
 
 	server.on("request", async (req, res) => {
@@ -168,15 +182,18 @@ function launchServer (port) {
 			break;
 
 			case "createUser":
-				res.writeHead("Content-type", "text/plain")
+				console.log("create user requested")
 				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
 					res.statusCode = 403
-					res.write("error: player object with specified properties already exists")
+					// res.writeHead("Content-type", "text/plain")
+					// res.write("error: player object with specified properties already exists")
 					break
 				}
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
+				console.log(users)
+				// res.writeHead("Content-type", "text/plain")
 				res.statusCode = 201
-				res.write("player object was created")
+				// res.write("player object was created")
 			break;
 
 			default: 
@@ -203,7 +220,7 @@ function launchServer (port) {
 		v.on("message", (msg) => {
 			console.log(msg)
 			let parsed = JSON.parse(msg)
-
+			console.log(parsed)
 			function echo() {
 				v.send(writeMessage("echo","none",parsed))
 			}
@@ -212,8 +229,16 @@ function launchServer (port) {
 				case "chat":
 					switch(parsed.subtype) {
 						case "message":
-
-						break
+							let userid = checkIP(req.socket.remoteAddress)
+							
+							if(userid !== "none") {
+								let usrArr = userid.split(":")
+								if (usrArr[0] === "player") {
+									chatlogs.push([users.players[usrArr[1]].username,parsed.data])
+									v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+								}
+							}
+						break;
 					}
 				break;
 			}
