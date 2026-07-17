@@ -186,17 +186,16 @@ function launchServer (port) {
 
 			case "createUser":
 				console.log("create user requested")
-				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
+				if (checkExistance(req.socket.remoteAddress,parsed[1]) || JSON.stringify(users.players[parsed[2]]) !== JSON.stringify({})) {
 					res.statusCode = 403
-					// res.writeHead("Content-type", "text/plain")
-					// res.write("error: player object with specified properties already exists")
-					break
+					console.log("requested to create a user that already exists")
+					break;
+					console.log("case was not broken (somehow)")
 				}
+				console.log("case was not broken")
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
 				console.log(users)
-				// res.writeHead("Content-type", "text/plain")
 				res.statusCode = 201
-				// res.write("player object was created")
 			break;
 
 			default: 
@@ -220,6 +219,11 @@ function launchServer (port) {
 		
 		let initChat = writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update"))
 		v.send(initChat)
+		
+		globalUpdate.addListener("update-chat", () => {
+			v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+		}) 
+			
 		v.on("message", (msg) => {
 			console.log(msg)
 			let parsed = JSON.parse(msg)
@@ -242,7 +246,7 @@ function launchServer (port) {
 								if (usrArr[0] === "spectator") {
 									chatlogs.push([users.players[usrArr[1]].username, parsed.data])
 								}
-								v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+								globalUpdate.emit("update-chat")
 							}
 						break;
 					}
