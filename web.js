@@ -5,6 +5,7 @@ import { json } from "node:stream/consumers";
 import { WebSocketServer as wssv } from "ws";
 import * as keyClass from "./classes/key-objects.js"
 import { error } from "node:console";
+import EventEmitter from "node:events";
 
 process.on("message", (msg) => {
 	if(msg[0] == "start_server") {
@@ -48,6 +49,8 @@ function launchServer (port) {
 	const chatlogs = [["this is a username","this is the message", "orange"]]
 	
 	const users = new keyClass.userlist()
+
+	const globalUpdate = new EventEmitter()
 
 	const server = http.createServer();
 
