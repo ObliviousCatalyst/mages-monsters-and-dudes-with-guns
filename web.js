@@ -162,8 +162,6 @@ function launchServer (port) {
 				res.write(files.chat.js)
 			break;
 
-			break;
-
 			case "fira_Code":
 				res.setHeader("Content-type", "font/ttf")
 				res.write(files.fonts.firaCode)
