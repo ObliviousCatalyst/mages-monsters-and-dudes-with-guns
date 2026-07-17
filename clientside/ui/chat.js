@@ -11,6 +11,7 @@ function writeMessage(type, subtype, data, callback) {
 		subtype: subtype,
 		data: data
 	}
+	// it's a synchronous function, why the fuck did i put a callback in here?
 	if (typeof callback === "function") {
 		callback()
 	}
