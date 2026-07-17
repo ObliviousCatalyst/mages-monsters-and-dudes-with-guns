@@ -5,6 +5,7 @@ import { json } from "node:stream/consumers";
 import { WebSocketServer as wssv } from "ws";
 //import EventEmitter from "node:events";
 import * as keyClass from "./classes/key-objects.js"
+import { error } from "node:console";
 //const signalar = new EventEmitter()
 
 process.on("message", (msg) => {
@@ -19,6 +20,9 @@ function launchServer (port) {
 		landing: {
 			html: fs.readFileSync("./clientside/ui/landing.html"),
 			css: fs.readFileSync("./clientside/ui/landing.css"),
+		},
+		error: {
+			html: fs.readFileSync("./clientside/ui/error.html"),
 		},
 		main: {
 			html: fs.readFileSync("./clientside/ui/main.html"),
@@ -95,6 +99,10 @@ function launchServer (port) {
 			case "":
 				res.setHeader("Content-type", "text/html");
 				res.write(files.landing.html)
+			break;
+
+			case "error.html":
+
 			break;
 			
 			case "main.html":
