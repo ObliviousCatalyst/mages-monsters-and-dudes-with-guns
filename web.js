@@ -216,20 +216,6 @@ function launchServer (port) {
 						break
 					}
 				break;
-
-				case "create user":
-					process.send({
-						type: "user req",
-						subtype: "create",
-						data: {
-							ip: req.socket.remoteAddress
-						}
-						
-
-					})
-						
-					
-				break;
 			}
 		})
 	})
