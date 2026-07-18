@@ -16,6 +16,8 @@ function writeMessage(type, subtype, data, callback) {
 	return JSON.stringify(temp)
 }
 
+const sockets = parent.sockets
+
 sockets.public.onmessage = (event) => {
 	console.log(event.data)
 	let data = event.data
