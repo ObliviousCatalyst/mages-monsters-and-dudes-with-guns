@@ -46,7 +46,7 @@ function launchServer (port) {
 	}
 	
 	const IP = "0.0.0.0";
-	const chatlogs = [["this is a username","this is the message", "orange"]]
+	const chatlogs = [["System","server started", "yellow"]]
 	
 	const users = new keyClass.userlist()
 
@@ -105,6 +105,11 @@ function launchServer (port) {
 		return "none"
 	}
 
+	function systemMessage (msg) {
+		chatlogs.push("System", msg, "yellow")
+		globalUpdate.emit("chat-update")
+	}
+
 	server.on("request", async (req, res) => {
 		
 		let parsed = req.url.split("/")
@@ -123,8 +128,13 @@ function launchServer (port) {
 			break;
 			
 			case "main.html":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.main.html);
+				if(checkExistance(req.socket.remoteAddress)) {
+					res.setHeader("Content-type", "text/html");
+					res.write(files.main.html);
+				}
+				else {
+					res.statusCode = 403
+				}
 			break;
 
 			case "grid.html":
@@ -196,6 +206,7 @@ function launchServer (port) {
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
 				console.log(users)
 				res.statusCode = 201
+				systemMessage(`user: "${parsed[1]} joined the game"`)
 			break;
 
 			default: 
