@@ -4,7 +4,6 @@ import url from "node:url";
 import { json } from "node:stream/consumers";
 import { WebSocketServer as wssv } from "ws";
 import * as keyClass from "./classes/key-objects.js"
-import { error } from "node:console";
 import EventEmitter from "node:events";
 
 process.on("message", (msg) => {
