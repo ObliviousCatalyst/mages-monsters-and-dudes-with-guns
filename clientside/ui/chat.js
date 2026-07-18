@@ -1,9 +1,7 @@
 const input = document.getElementById("chat-input")
 const sendButton = document.getElementById("send")
 const chatDisp = document.getElementById("chat-log")
-const sockets = {
-	public: new WebSocket(`ws://${window.location.host}/public`)
-}
+
 
 function writeMessage(type, subtype, data, callback) {
 	let temp = {

@@ -26,6 +26,7 @@ function launchServer (port) {
 		main: {
 			html: fs.readFileSync("./clientside/ui/main.html"),
 			css: fs.readFileSync("./clientside/ui/main.css"),
+			js: fs.readFileSync("./clientside/ui/global.js"),
 		},
 		grid: {
 			html: fs.readFileSync("./clientside/ui/grid.html"),
@@ -157,11 +158,6 @@ function launchServer (port) {
 				res.write(files.landing.css)
 			break;
 
-			case "landing.js":
-				res.setHeader("Content-type", "text/js");
-				res.write(files.landing.js)
-			break;
-
 			case "main.css":
 				res.setHeader("Content-type", "text/css");
 				res.write(files.main.css);
@@ -175,13 +171,21 @@ function launchServer (port) {
 			case "redOrbit.css":
 				res.setHeader("Content-type", "text/css");
 				res.write(files.orbit.redCss);
-
 			break;
 
 			case "chat.css":
 				res.setHeader("Content-type", "text/css");
 				res.write(files.chat.css);
+			break;
 
+			case "landing.js":
+				res.setHeader("Content-type", "text/js");
+				res.write(files.landing.js)
+			break;
+
+			case "global.js": 
+				res.setHeader("Content-type", "text/js");
+				res.write(files.main.js)
 			break;
 
 			case "chat.js":
