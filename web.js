@@ -210,7 +210,7 @@ function launchServer (port) {
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
 				console.log(users)
 				res.statusCode = 201
-				systemMessage(`user: "${parsed[1]} joined the game"`)
+				systemMessage(`user: "${parsed[1]}" joined the game`)
 			break;
 
 			default: 
