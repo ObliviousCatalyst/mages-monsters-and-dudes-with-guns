@@ -65,19 +65,32 @@ function launchServer (port) {
 		function checkProperty(key, value) {
 			let playerEmpty = false
 			let specEmpty = false
-			if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { playerEmpty = true }
-			if (users.spectators === []) { specEmpty = true }
+			if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
+				playerEmpty = true 
+				console.log("set playerempty")
+			}
+			if (users.spectators === []) { 
+				specEmpty = true 
+				console.log("set specempty")
+			}
 			if (playerEmpty && specEmpty) {
+				console.log("both empty")
 				return false
 			}
 			if (value === users.players.red[key] || value === users.players.blue[key]) {
+				console.log("match player")
 				return true
 			}
-			for (let pt = 0; pt < users.spectators; pt++) {
+			console.log(users.spectators.length)
+			for (let pt = 0; pt < users.spectators.length; pt++) {
+				console.log(`checked spec ${pt}`)
 				if (value === users.spectators[pt][key]) {
+					console.log("match spec")
 					return true
 				}
 			}
+			console.log("match none")
+			console.log(users)
 			return false
 		}
 		if (typeof username === "string") {
@@ -111,7 +124,7 @@ function launchServer (port) {
 		globalUpdate.emit("chat-update")
 	}
 
-	server.on("request", async (req, res) => {
+	server.on("request", (req, res) => {
 		
 		let parsed = req.url.split("/")
 		if (parsed[0] === "" && parsed.length > 1) {
@@ -200,15 +213,37 @@ function launchServer (port) {
 
 			case "createUser":
 				console.log("create user requested")
-				if (checkExistance(req.socket.remoteAddress,parsed[1]) || JSON.stringify(users.players[parsed[2]]) !== JSON.stringify({})) {
+
+				function fail() {
 					res.statusCode = 403
 					console.log("requested to create a user that already exists")
+				}
+
+				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
+					console.log("1st")
+					fail()
 					break;
 					console.log("case was not broken (somehow)")
 				}
+
+				if(parsed[2] === "spectator") {
+					console.log("2nd")
+					users.addSpectator(parsed[1],req.socket.remoteAddress)
+					console.log(users)
+					res.statusCode = 201
+					break;
+				}
+				
+				if (JSON.stringify(users.players[parsed[2]]) !== JSON.stringify({})) {
+					console.log("3rd")
+					fail()
+					break;
+					console.log("case was not broken (somehow)")
+				}
+
 				console.log("case was not broken")
+				
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
-				console.log(users)
 				res.statusCode = 201
 				systemMessage(`user: "${parsed[1]}" joined the game`)
 			break;

@@ -9,7 +9,7 @@ form.addEventListener("submit", (event) => {
 	console.log(v1)
 	console.log(v2)
 	console.log(window.location)
-	fetch(`http://${window.location.host}/createUser/${v1}/${v2}`).then((res) => {
+	fetch(`/createUser/${v1}/${v2}`).then((res) => {
 		console.log(res.status)
 		if(res.status = 201) {
 			window.location = "/main.html"
