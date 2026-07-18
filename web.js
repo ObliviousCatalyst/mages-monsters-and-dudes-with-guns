@@ -107,7 +107,7 @@ function launchServer (port) {
 	}
 
 	function systemMessage (msg) {
-		chatlogs.push("System", msg, "yellow")
+		chatlogs.push(["System", msg, "yellow"])
 		globalUpdate.emit("chat-update")
 	}
 
