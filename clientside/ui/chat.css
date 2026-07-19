@@ -14,8 +14,9 @@ html, body {
 
 .logs {
 	flex: 100;
-	overflow: hidden;
+	overflow-y: scroll;
 	vertical-align: bottom;
+	max-height: 100%;
 }
 
 #log-container {
