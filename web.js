@@ -210,7 +210,7 @@ function launchServer (port) {
 				res.write(files.fonts.firaCode)
 			break;
 
-			case "createUser":
+			case "createUser": {
 				console.log("create user requested")
 
 				function fail () {
@@ -246,7 +246,7 @@ function launchServer (port) {
 				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
 				res.statusCode = 201
 				systemMessage(`user: "${parsed[1]}" joined the game`)
-			break;
+			}break;
 
 			default: 
 				res.statusCode = 404;
