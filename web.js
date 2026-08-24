@@ -68,7 +68,7 @@ function launchServer (port) {
 				playerEmpty = true 
 				console.log("set playerempty")
 			}
-			if (users.spectators === []) { 
+			if (users.spectators == []) { 
 				specEmpty = true 
 				console.log("set specempty")
 			}
