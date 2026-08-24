@@ -141,7 +141,7 @@ function launchServer (port) {
 			break;
 			
 			case "main.html":
-				if(checkExistance(req.socket.remoteAddress)) {
+				if (checkExistance(req.socket.remoteAddress)) {
 					res.setHeader("Content-type", "text/html");
 					res.write(files.main.html);
 				}
@@ -201,7 +201,7 @@ function launchServer (port) {
 			break;
 
 			case "chat.js":
-				res.setHeader("Content-type", "text/javascript")
+				res.setHeader("Content-type", "text/js")
 				res.write(files.chat.js)
 			break;
 
@@ -213,7 +213,7 @@ function launchServer (port) {
 			case "createUser":
 				console.log("create user requested")
 
-				function fail() {
+				function fail () {
 					res.statusCode = 403
 					console.log("requested to create a user that already exists")
 				}
@@ -222,22 +222,23 @@ function launchServer (port) {
 					console.log("1st")
 					fail()
 					break;
-					console.log("case was not broken (somehow)")
+					console.log("if you're reading this somthing has gone horribly wrong")
 				}
 
-				if(parsed[2] === "spectator") {
+				if (parsed[2] === "spectator") {
 					console.log("2nd")
 					users.addSpectator(parsed[1],req.socket.remoteAddress)
 					console.log(users)
 					res.statusCode = 201
 					break;
+					console.log("if you're reading this somthing has gone horribly wrong")
 				}
 				
 				if (JSON.stringify(users.players[parsed[2]]) !== JSON.stringify({})) {
 					console.log("3rd")
 					fail()
 					break;
-					console.log("case was not broken (somehow)")
+					console.log("if you're reading this somthing has gone horribly wrong")
 				}
 
 				console.log("case was not broken")
