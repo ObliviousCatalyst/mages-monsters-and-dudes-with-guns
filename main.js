@@ -7,8 +7,6 @@ const __dirname = import.meta.dirname
 const serverProcess = fork("./web.js")
 
 let win
-let server
-let users
 
 function createWindow() {
 	win = new BrowserWindow({
