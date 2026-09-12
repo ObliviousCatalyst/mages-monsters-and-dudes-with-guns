@@ -12,6 +12,7 @@ process.on("message", (msg) => {
 })
 
 function launchServer (port) {
+	/***** SETUP *****/
 	const files = {
 		landing: {
 			html: fs.readFileSync("./clientside/ui/landing.html"),
@@ -49,9 +50,6 @@ function launchServer (port) {
 	
 	const users = new keyClass.userlist()
 
-	/**
-	 * @emits globalUpdate#chat-update
-	 */
 	const globalUpdate = new class extends EventEmitter {
 		constructor () {
 			super()
@@ -66,6 +64,8 @@ function launchServer (port) {
 		blue: new wssv({ noServer: true }),
 	}
 	
+	/***** IMPORTANT FUNCTIONS *****/
+
 	function checkExistance(ip, username) {
 		function checkProperty(key, value) {
 			let playerEmpty = false
@@ -128,6 +128,8 @@ function launchServer (port) {
 		chatlogs.push(["System", msg, "yellow"])
 		globalUpdate.emit("chat-update")
 	}
+
+	/***** HTTP SERVER *****/
 
 	server.on("request", (req, res) => {
 		
@@ -232,9 +234,11 @@ function launchServer (port) {
 				}
 
 				if(parsed[2] === "spectator") {
-					console.log("2nd")
+					console.log("adding spectator")
 					users.addSpectator(parsed[1],req.socket.remoteAddress)
-					console.log(users)
+					
+					console.log("users: ",users)
+					console.log("spectators: ", users.spectators)
 					res.statusCode = 201
 					break;
 				}
@@ -260,6 +264,7 @@ function launchServer (port) {
 		res.end()
 	})
 
+	/***** WEBSOCKET HANDELER  *****/
 	// i know naming your variables a single letter is bad practice but i cannot be fucked to come up with actual names right now
 	sockets.public.on("connection", (v,req) => {
 		console.log("connected to public socket")
