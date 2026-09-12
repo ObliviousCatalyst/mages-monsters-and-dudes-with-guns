@@ -100,7 +100,8 @@
 			</div>
 		</div>
 		<script src="global.js"></script>
-		<script>
+		<script defer>
+			/***** MENU/BUTTON SETUP *****/
 			const menus = document.getElementsByClassName("menu")
 			const chatBtn = document.getElementById("chat-button")
 			const chatMenu = document.getElementById("chat")
@@ -137,6 +138,28 @@
 				clearMenus()
 				quitMenu.classList.add("opened")
 			}, false)
+
+			/***** STYLER *****/
+			const myItems = document.getElementsByClassName("my")
+			const oppItems = document.getElementsByClassName("opp")
+			{
+				let myClassName
+				let oppClassName
+				if (true /* replace this condition */) {
+					myclassName = "blue"
+					oppClassName = "red"
+				}
+				else {
+					myclassName = "red"
+					oppClassName = "blue"
+				}
+
+				// this should be fine right? surely there is no way for these arrays to be different lengths.
+				for (let pt = 0; pt < myItems.length; pt++) {
+					myItems[pt].classList.add(myClassName)
+					oppItems[pt].classList.add(oppClassName)
+				}
+			}
 		</script>
 	</body>
 </html>

@@ -86,7 +86,7 @@ function launchServer (port) {
 				console.log("match player")
 				return true
 			}
-			console.log(users.spectators.length)
+			console.log("spectator count:",users.spectators.length)
 			for (let pt = 0; pt < users.spectators.length; pt++) {
 				console.log(`checked spec ${pt}`)
 				if (value === users.spectators[pt][key]) {
@@ -95,7 +95,7 @@ function launchServer (port) {
 				}
 			}
 			console.log("match none")
-			console.log(users)
+			console.log("users:",users)
 			return false
 		}
 		if (typeof username === "string") {
@@ -239,6 +239,7 @@ function launchServer (port) {
 					
 					console.log("users: ",users)
 					console.log("spectators: ", users.spectators)
+					for (let pt = 0; pt < users.spectators.length; pt++) console.log(`spectator[${pt}]`,users.spectators[pt])
 					res.statusCode = 201
 					break;
 				}
@@ -264,7 +265,7 @@ function launchServer (port) {
 		res.end()
 	})
 
-	/***** WEBSOCKET HANDELER  *****/
+	/***** WEBSOCKET HANDELER *****/
 	// i know naming your variables a single letter is bad practice but i cannot be fucked to come up with actual names right now
 	sockets.public.on("connection", (v,req) => {
 		console.log("connected to public socket")
