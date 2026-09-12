@@ -66,12 +66,4 @@ export class userlist {
 	addPlayer(username,ip,team){
 		this.players[team] = new user.player(username,ip)
 	}
-
-	addHost(username) {
-		this.host = new user.host(username)
-	}
 }
-
-// const board = new staticMatrix(9,9)
-// console.log(board)
-// redDeck = new deck()

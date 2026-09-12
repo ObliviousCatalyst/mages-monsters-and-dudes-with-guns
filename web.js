@@ -49,7 +49,14 @@ function launchServer (port) {
 	
 	const users = new keyClass.userlist()
 
-	const globalUpdate = new EventEmitter()
+	/**
+	 * @emits globalUpdate#chat-update
+	 */
+	const globalUpdate = new class extends EventEmitter {
+		constructor () {
+			super()
+		}
+	}
 
 	const server = http.createServer();
 
@@ -212,7 +219,7 @@ function launchServer (port) {
 			case "createUser": {
 				console.log("create user requested")
 
-				function fail() {
+				function fail () {
 					res.statusCode = 403
 					console.log("requested to create a user that already exists")
 				}
