@@ -1,12 +1,17 @@
-class card {
+export class card {
 	assets = {}
 }
 
-class unit extends card {
-	type = "unit"
+
+export class unit extends card {
+	/**
+	 * @type {Object}
+	 * @property {number} hp
+	 * @property {number} atk
+	*/
 	stats = {
-		hp,
-		atk,
+		//hp,
+		//atk,
 		alt,
 		speed,
 		stamina,
@@ -24,56 +29,15 @@ class unit extends card {
 	}
 }
 
-class gordon extends unit {	
-	constructor () {
-		// types
-		size = "macro";
-		tier = "A";
-		faction = "black mesa";
-
-		// stats
-		stats.hp = 200
-		stats.atk = 80
-		stats.alt = 0
-		stats.speed = 2
-		stats.stamina = 3
-		stats.slots = 4
-		cost.food = 2
-		cost.equip = "crowbar"
-
-		// assets
-		assets.image
-		assets.icon
-
-		// advanced
-		actions.kick = {
-			range: 1,
-			types: {
-				"blunt": "atk",
-			}
-		};
-		advantage.strong = ["blunt","sharp","poison","radiation"];
-		advantage.weak = ["dark","strange"];
-	}
-		
-	effect() {
-		// blank
-	}
-	kick() {
-		
-	}
+export class action extends card {
 	
 }
 
-class action extends card {
+export class item extends card {
 	
 }
 
-class item extends card {
-	
-}
-
-class orbit extends card {
+export class orbit extends card {
 	
 }
 

@@ -1,9 +1,12 @@
 import http from "node:http";
 import fs from "node:fs";
 import url from "node:url";
-import { WebSocketServer as wssv } from "ws";
-import * as keyClass from "./classes/key-objects.js"
 import EventEmitter from "node:events";
+
+import { WebSocketServer as wssv } from "ws";
+
+import * as keyClass from "./classes/key-objects.js"
+import boardTemplate from "./classes/board.js";
 
 process.on("message", (msg) => {
 	if(msg[0] == "start_server") {
