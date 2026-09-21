@@ -21,9 +21,9 @@ class gordon extends unit {
 		stats.hp = 200
 		stats.atk = 80
 		stats.alt = 0
-		stats.spd = 2
-		stats.stm = 3
-		stats.slt = 4
+		stats.speed = 2
+		stats.stamina = 3
+		stats.slots = 4
 		cost.food = 2
 		cost.equip = "crowbar"
 
