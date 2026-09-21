@@ -14,50 +14,54 @@ process.on("message", (msg) => {
 	}
 })
 
+const files = {
+	landing: {
+		html: fs.readFileSync("./clientside/ui/landing.html"),
+		css: fs.readFileSync("./clientside/ui/landing.css"),
+		js: fs.readFileSync("./clientside/ui/landing.js")
+	},
+	error: {
+		html: fs.readFileSync("./clientside/ui/error.html"),
+	},
+	main: {
+		html: fs.readFileSync("./clientside/ui/main.html"),
+		css: fs.readFileSync("./clientside/ui/main.css"),
+		js: fs.readFileSync("./clientside/ui/global.js"),
+	},
+	grid: {
+		html: fs.readFileSync("./clientside/ui/grid.html"),
+		css: fs.readFileSync("./clientside/ui/grid.css"),
+	},
+	chat: {
+		html: fs.readFileSync("./clientside/ui/chat.html"),
+		css: fs.readFileSync("./clientside/ui/chat.css"),
+		js: fs.readFileSync("./clientside/ui/chat.js"),
+	},
+	orbit: {
+		html: fs.readFileSync("./clientside/ui/orbit.html"),
+		redCss: fs.readFileSync("./clientside/ui/redOrbit.css"),
+	},
+	fonts: {
+		firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
+	}
+}
+
+const IP = "0.0.0.0";
+const chatlogs = [["System", "server started", "yellow"]]
+
+const users = new keyClass.userlist()
+
+const board = new boardTemplate(7, 7)
+
+const globalUpdate = new class extends EventEmitter {
+	constructor() {
+		super()
+	}
+}
+
 function launchServer (port) {
 	/***** SETUP *****/
-	const files = {
-		landing: {
-			html: fs.readFileSync("./clientside/ui/landing.html"),
-			css: fs.readFileSync("./clientside/ui/landing.css"),
-			js: fs.readFileSync("./clientside/ui/landing.js")
-		},
-		error: {
-			html: fs.readFileSync("./clientside/ui/error.html"),
-		},
-		main: {
-			html: fs.readFileSync("./clientside/ui/main.html"),
-			css: fs.readFileSync("./clientside/ui/main.css"),
-			js: fs.readFileSync("./clientside/ui/global.js"),
-		},
-		grid: {
-			html: fs.readFileSync("./clientside/ui/grid.html"),
-			css: fs.readFileSync("./clientside/ui/grid.css"),
-		},
-		chat: {
-			html: fs.readFileSync("./clientside/ui/chat.html"), 
-			css: fs.readFileSync("./clientside/ui/chat.css"), 
-			js: fs.readFileSync("./clientside/ui/chat.js"),
-		},
-		orbit: {
-			html: fs.readFileSync("./clientside/ui/orbit.html"),
-			redCss: fs.readFileSync("./clientside/ui/redOrbit.css"),
-		},
-		fonts: {
-			firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
-		}
-	}
 	
-	const IP = "0.0.0.0";
-	const chatlogs = [["System","server started", "yellow"]]
-	
-	const users = new keyClass.userlist()
-
-	const globalUpdate = new class extends EventEmitter {
-		constructor () {
-			super()
-		}
-	}
 
 	const server = http.createServer();
 
