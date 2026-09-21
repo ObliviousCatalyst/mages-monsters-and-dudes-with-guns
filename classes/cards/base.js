@@ -4,10 +4,24 @@ class card {
 
 class unit extends card {
 	type = "unit"
-	stats = {}
+	stats = {
+		hp,
+		atk,
+		alt,
+		speed,
+		stamina,
+		slots,
+	}
 	actions = {}
-	cost = {}
-	adv = {}
+	cost = {
+		food,
+		metal,
+		mana,
+	}
+	advantage = {
+		strong,
+		weak,
+	}
 }
 
 class gordon extends unit {	
@@ -38,8 +52,8 @@ class gordon extends unit {
 				"blunt": "atk",
 			}
 		};
-		adv.strong = ["blunt","sharp","poison","radiation"];
-		adv.weak = ["dark","strange"];
+		advantage.strong = ["blunt","sharp","poison","radiation"];
+		advantage.weak = ["dark","strange"];
 	}
 		
 	effect() {
