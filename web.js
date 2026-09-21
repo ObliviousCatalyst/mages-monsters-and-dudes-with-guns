@@ -8,6 +8,7 @@ import { WebSocketServer as wssv } from "ws";
 import * as keyClass from "./classes/key-objects.js"
 import boardTemplate from "./classes/board.js";
 
+// now realising that using fs to import assest might come back to bite me in the ass
 const files = {
 	landing: {
 		html: fs.readFileSync("./clientside/ui/landing.html"),
