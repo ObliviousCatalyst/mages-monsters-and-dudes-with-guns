@@ -8,12 +8,6 @@ import { WebSocketServer as wssv } from "ws";
 import * as keyClass from "./classes/key-objects.js"
 import boardTemplate from "./classes/board.js";
 
-process.on("message", (msg) => {
-	if(msg[0] == "start_server") {
-		launchServer(msg[1])
-	}
-})
-
 const files = {
 	landing: {
 		html: fs.readFileSync("./clientside/ui/landing.html"),
@@ -58,6 +52,12 @@ const globalUpdate = new class extends EventEmitter {
 		super()
 	}
 }
+
+process.on("message", (msg) => {
+	if (msg[0] == "start_server") {
+		launchServer(msg[1])
+	}
+})
 
 function launchServer (port) {
 	/***** SETUP *****/
