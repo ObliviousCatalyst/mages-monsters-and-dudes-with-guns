@@ -26,10 +26,8 @@ app.whenReady().then(() => createWindow())
 ipcMain.on("start",(event,val) => {
 	console.log("start")
 	console.log(val)
-	//server = web.launchServer(val)
 	serverProcess.send(["start_server",val])
 	
-	//users.addHost("host")
 })
 
 serverProcess.on("message", (msg) => {
