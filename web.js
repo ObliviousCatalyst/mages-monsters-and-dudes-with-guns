@@ -6,7 +6,6 @@ import EventEmitter from "node:events";
 import { WebSocketServer as wssv } from "ws";
 
 import * as keyClass from "./classes/key-objects.js"
-import boardTemplate from "./classes/board.js";
 
 const files = {
 	landing: {
