@@ -45,9 +45,11 @@ const chatlogs = [["System", "server started", "yellow"]]
 
 const users = new keyClass.userlist()
 
-const board = new boardTemplate(7, 7)
+const board = new keyClass.board(7, 7)
 
-const globalUpdate = new class extends EventEmitter {
+const entities = new keyClass.entityList()
+
+new class globalUpdate extends EventEmitter {
 	constructor() {
 		super()
 	}
