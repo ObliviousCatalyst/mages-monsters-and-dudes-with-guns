@@ -24,10 +24,8 @@ function createWindow() {
 app.whenReady().then(() => createWindow())
 
 ipcMain.on("start",(event,val) => {
-	console.log("start")
-	console.log(val)
 	serverProcess.send(["start_server",val])
-	
+	win.loadFile("./serverside_ui/control pannel.html")
 })
 
 serverProcess.on("message", (msg) => {
