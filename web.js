@@ -6,6 +6,10 @@ import EventEmitter from "node:events";
 import { WebSocketServer as wssv } from "ws";
 
 import * as keyClass from "./classes/key-objects.js"
+import * as cards from "./classes/cards.js"
+
+/***** SETUP *****/
+/***/
 
 const files = {
 	landing: {
@@ -48,99 +52,96 @@ const board = new keyClass.board(7, 7)
 
 const entities = new keyClass.entityList()
 
-new class globalUpdate extends EventEmitter {
+const globalUpdate = new class extends EventEmitter {
 	constructor() {
 		super()
 	}
 }
 
-process.on("message", (msg) => {
-	if (msg[0] == "start_server") {
-		launchServer(msg[1])
-	}
-})
+/**
+ * THIS IS TEMPORARY
+ * REMOVE THIS FUCNTION ASAP
+ */
+function spawnGordon () {
+	board[5][5] = entities.spawnUnit(cards.gordon)
+}
 
-function launchServer (port) {
-	/***** SETUP *****/
-	
+const server = http.createServer();
 
-	const server = http.createServer();
+const sockets = {
+	public: new wssv({ noServer: true }),
+	red: new wssv({ noServer: true }),
+	blue: new wssv({ noServer: true }),
+}
 
-	const sockets = {
-		public: new wssv({ noServer: true }),
-		red: new wssv({ noServer: true }),
-		blue: new wssv({ noServer: true }),
-	}
-	
-	/***** IMPORTANT FUNCTIONS *****/
+/***** IMPORTANT FUNCTIONS *****/
 
-	function checkExistance(ip, username) {
-		function checkProperty(key, value) {
-			let playerEmpty = false
-			let specEmpty = false
-			if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
-				playerEmpty = true 
-				console.log("set playerempty")
-			}
-			if (users.spectators == []) { 
-				specEmpty = true 
-				console.log("set specempty")
-			}
-			if (playerEmpty && specEmpty) {
-				console.log("both empty")
-				return false
-			}
-			if (value === users.players.red[key] || value === users.players.blue[key]) {
-				console.log("match player")
-				return true
-			}
-			console.log("spectator count:",users.spectators.length)
-			for (let pt = 0; pt < users.spectators.length; pt++) {
-				console.log(`checked spec ${pt}`)
-				if (value === users.spectators[pt][key]) {
-					console.log("match spec")
-					return true
-				}
-			}
-			console.log("match none")
-			console.log("users:",users)
+function checkExistance(ip, username) {
+	function checkProperty(key, value) {
+		let playerEmpty = false
+		let specEmpty = false
+		if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
+			playerEmpty = true 
+			console.log("set playerempty")
+		}
+		if (users.spectators == []) { 
+			specEmpty = true 
+			console.log("set specempty")
+		}
+		if (playerEmpty && specEmpty) {
+			console.log("both empty")
 			return false
 		}
-		if (typeof username === "string") {
-			if (checkProperty("username",username)) {
+		if (value === users.players.red[key] || value === users.players.blue[key]) {
+			console.log("match player")
+			return true
+		}
+		console.log("spectator count:",users.spectators.length)
+		for (let pt = 0; pt < users.spectators.length; pt++) {
+			console.log(`checked spec ${pt}`)
+			if (value === users.spectators[pt][key]) {
+				console.log("match spec")
 				return true
 			}
 		}
-		if (checkProperty("ip",ip)) {
-			return true
-		}
+		console.log("match none")
+		console.log("users:",users)
 		return false
 	}
-
-	function checkIP (ip) {
-		if (ip === users.players.red.ip) {
-			return "player:red"
+	if (typeof username === "string") {
+		if (checkProperty("username",username)) {
+			return true
 		}
-		if (ip === users.players.blue.ip) {
-			return "player:blue"
-		}
-		for (let pt = 0; pt < users.spectators; pt++) {
-			if (ip === users.spectators[pt].ip) {
-				return `spectator:${pt}`
-			}
-		}
-		return "none"
 	}
-
-	function systemMessage (msg) {
-		chatlogs.push(["System", msg, "yellow"])
-		globalUpdate.emit("chat-update")
+	if (checkProperty("ip",ip)) {
+		return true
 	}
+	return false
+}
 
+function checkIP (ip) {
+	if (ip === users.players.red.ip) {
+		return "player:red"
+	}
+	if (ip === users.players.blue.ip) {
+		return "player:blue"
+	}
+	for (let pt = 0; pt < users.spectators; pt++) {
+		if (ip === users.spectators[pt].ip) {
+			return `spectator:${pt}`
+		}
+	}
+	return "none"
+}
+
+function systemMessage (msg) {
+	chatlogs.push(["System", msg, "yellow"])
+	globalUpdate.emit("chat-update")
+}
+
+function launchServer (port) {
 	/***** HTTP SERVER *****/
-
 	server.on("request", (req, res) => {
-		
 		let parsed = req.url.split("/")
 		if (parsed[0] === "" && parsed.length > 1) {
 			parsed.shift()
@@ -345,3 +346,8 @@ function launchServer (port) {
 		console.log("server running")
 	});
 }
+
+process.on("message", (msg) => {
+	if (msg[0] === "start_server") launchServer(msg[1])
+	if (msg[0] === "spawn gordon") spawnGordon()
+})
