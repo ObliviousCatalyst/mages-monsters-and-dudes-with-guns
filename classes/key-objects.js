@@ -1,7 +1,6 @@
 import * as user from "./users.js"
 import * as cards from "./cards.js"
-import {} from "./pointers.js"
-import { item } from "./cards/base.js"
+import { entityPointer } from "./pointers.js"
 
 // export class staticArray {
 // 	constructor(depth) {
@@ -196,15 +195,29 @@ export class entityList {
 	orbitals = []
 
 	/**
-	 * 
-	 * @param {cards.base.unit} k 
+	 * create a unit and return a pointer to that unit's position in the entity list 
+	 * @param {cards.base.unit} source 
+	 * @param {...*} args 
+	 * @returns {entityPointer}
 	 */
-	spawnUnit () {
-
+	spawnUnit (source, ...args) {
+		if (!(source.prototype instanceof cards.base.unit)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.unit")
+		let index = this.units.push(new source(...args))
+		index--
+		return new entityPointer("units",index)
 	}
 
-	spawnOrbital () {
-
+	/**
+	 * create an obital and return a pointer to that orbital's position in the entity list 
+	 * @param {cards.base.orbit} source 
+	 * @param {...*} args 
+	 * @returns {entityPointer}
+	 */
+	spawnOrbital (source, ...args) {
+		if (!(source.prototype instanceof cards.base.orbit)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.orbit")
+		let index = this.orbitals.push(new source(...args))
+		index--
+		return new entityPointer("orbitals",index)
 	}
 
 	spawn

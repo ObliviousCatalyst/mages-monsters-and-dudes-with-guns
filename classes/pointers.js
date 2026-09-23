@@ -7,8 +7,7 @@ export class entityPointer {
 	 * @param {string} array 
 	 * @param {number} index 
 	 */
-	constructor (team,array,index) {
-		this.team = team
+	constructor (array,index) {
 		this.array = array
 		this.index = index
 	}
