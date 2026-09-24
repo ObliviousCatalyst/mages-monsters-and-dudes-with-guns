@@ -23,9 +23,13 @@ function createWindow() {
 
 app.whenReady().then(() => createWindow())
 
-ipcMain.on("start",(event,val) => {
+ipcMain.on("start", (event,val) => {
 	serverProcess.send(["start_server",val])
 	win.loadFile("./serverside_ui/control pannel.html")
+})
+
+ipcMain.on("spawnG", () => {
+	serverProcess.send(["spawn gordon"])
 })
 
 serverProcess.on("message", (msg) => {

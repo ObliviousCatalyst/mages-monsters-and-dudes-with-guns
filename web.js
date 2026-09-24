@@ -7,6 +7,7 @@ import { WebSocketServer as wssv } from "ws";
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
+import { stringify } from "node:querystring";
 
 /***** SETUP *****/
 /***/
@@ -65,6 +66,7 @@ const globalUpdate = new class extends EventEmitter {
  */
 function spawnGordon () {
 	board[5][5] = entities.spawnUnit(cards.gordon)
+	globalUpdate.emit("update-game")
 }
 
 const server = http.createServer();
@@ -280,12 +282,11 @@ function launchServer (port) {
 	sockets.public.on("connection", (v,req) => {
 		console.log("connected to public socket")
 		function writeMessage(type, subtype, data) {
-			let temp = {
+			return JSON.stringify({
 				type: type,
 				subtype: subtype,
 				data: data
-			}
-			return JSON.stringify(temp)
+			})
 		}
 		
 		let initChat = writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update"))
@@ -294,14 +295,17 @@ function launchServer (port) {
 		globalUpdate.addListener("update-chat", () => {
 			v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
 		}) 
+
+		globalUpdate.on("update-game", () => {
+			v.send(writeMessage("update", "game-state", { board, entities }))
+		}) 
 			
 		v.on("message", (msg) => {
 			console.log(msg)
 			let parsed = JSON.parse(msg)
 			console.log(parsed)
-			function echo() {
-				v.send(writeMessage("echo","none",parsed))
-			}
+			
+
 
 			switch(parsed.type) {
 				case "chat":
