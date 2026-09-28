@@ -7,6 +7,7 @@ import { WebSocketServer as wssv } from "ws";
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
+import path from "node:path";
 
 /***** SETUP *****/
 /***/
@@ -280,6 +281,24 @@ function launchServer (port) {
 				res.statusCode = 201
 				systemMessage(`user: "${parsed[1]}" joined the game`)
 			}break;
+
+			case "images":
+				let imgPath = path.join(__dirname,url.pathname)
+				if (!imgPath.startsWith(path.join(__dirname,"images"))) {
+					res.statusCode = 403
+					break
+				}
+
+				fs.access(imgPath, fs.constants.F_OK, (err) => {
+					if (err) {
+						res.statusCode = 404
+						return
+					}
+					let extension = path.extname(imgPath)
+					res.setHeader("Content-type", mimeTypes[extension])
+					fs.createReadStream(imgPath).pipe(res)
+				})
+			break
 
 			default: 
 				res.statusCode = 404;
