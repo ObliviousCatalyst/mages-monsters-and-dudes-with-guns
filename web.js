@@ -241,7 +241,6 @@ function launchServer (port) {
 					console.log("1st")
 					fail()
 					break;
-					console.log("case was not broken (somehow)")
 				}
 
 				if(parsed[2] === "spectator") {
@@ -259,7 +258,6 @@ function launchServer (port) {
 					console.log("3rd")
 					fail()
 					break;
-					console.log("case was not broken (somehow)")
 				}
 
 				console.log("case was not broken")
