@@ -144,7 +144,8 @@ function systemMessage (msg) {
 function launchServer (port) {
 	/***** HTTP SERVER *****/
 	server.on("request", (req, res) => {
-		let parsed = req.url.split("/")
+		let url = new URL(req.url)
+		let parsed = url.pathname.split("/")
 		if (parsed[0] === "" && parsed.length > 1) {
 			parsed.shift()
 		}
