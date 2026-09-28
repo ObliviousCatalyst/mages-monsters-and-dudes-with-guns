@@ -157,9 +157,11 @@ function launchServer (port) {
 	server.on("request", (req, res) => {
 		let url = new URL(req.url)
 		let parsed = url.pathname.split("/")
+		let keepOpen = false
 		if (parsed[0] === "" && parsed.length > 1) {
 			parsed.shift()
 		}
+		
 		switch (parsed[0]) {
 			case "":
 				res.setHeader("Content-type", "text/html");
@@ -283,7 +285,7 @@ function launchServer (port) {
 				res.statusCode = 404;
 			break;
 		}
-		res.end()
+		if (!keepOpen) res.end()
 	})
 
 	/***** WEBSOCKET HANDELER *****/
