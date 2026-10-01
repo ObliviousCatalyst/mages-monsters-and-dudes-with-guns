@@ -70,9 +70,10 @@ export class board {
 	 * @param {number} height 
 	 */
 	constructor(height = 1, width = 1) {
-		let wip = {}
-		wip.height = height
-		wip.width = width
+		let wip = {
+			height: height,
+			width: width,
+		}
 		for (let pt = 0; pt < height; pt++) {
 			let row = { length: width } 
 			for (let ix = 0; ix < width; ix++) {
