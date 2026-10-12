@@ -7,6 +7,7 @@
 	- peircing - stab and gun
 	- blast - kaboom
 	- true - used for stuff that doesnt have weakneses or resistances
+	- arcana - magic
 
 
 * secondary
@@ -14,4 +15,5 @@
 	- cold - cold
 	- water - water
 	- electric - zap
-	- arcana - magic
+	- psychic - brain damage
+	
