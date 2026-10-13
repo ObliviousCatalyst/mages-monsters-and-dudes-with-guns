@@ -4,11 +4,11 @@ import { fork } from "node:child_process"
 
 const __dirname = import.meta.dirname
 
-const serverProcess = fork("./web.js")
+const serverProcess = fork("./servers.js")
 
 let win
 
-function createWindow() {
+function createWindow () {
 	win = new BrowserWindow({
 		width: 1920, 
 		height: 1080,
