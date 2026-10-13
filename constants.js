@@ -1,4 +1,5 @@
-import EventEmitter from "node:events";
+import EventEmitter from "node:events"
+import fs from "node:fs"
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"

@@ -24,7 +24,9 @@ function launchServer (port) {
 	/***** HTTP SERVER *****/
 	/***/
 	server.on("request", (req, res) => {
-		let url = new URL(req.url)
+		let url = new URL(req.url, "http://0.0.0.0")
+		console.log(url)
+
 		let parsed = url.pathname.split("/")
 		let keepOpen = false
 		if (parsed[0] === "" && parsed.length > 1) {

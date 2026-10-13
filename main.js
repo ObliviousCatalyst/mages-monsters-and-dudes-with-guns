@@ -29,9 +29,9 @@ ipcMain.on("start", (event,val) => {
 })
 
 ipcMain.on("spawnG", () => {
-	serverProcess.send(["spawn gordon"])
+	// serverProcess.send(["spawn gordon"])
 })
 
 serverProcess.on("message", (msg) => {
 	
-})
+// })
