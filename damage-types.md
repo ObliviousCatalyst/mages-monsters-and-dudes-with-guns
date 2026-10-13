@@ -16,4 +16,5 @@
 	- water - water
 	- electric - zap
 	- psychic - brain damage
+	- rads - radiation
 	
