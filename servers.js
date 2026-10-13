@@ -1,10 +1,11 @@
-import http from "node:http";
-import fs from "node:fs";
-import url from "node:url";
+import http from "node:http"
+import fs from "node:fs"
+import url from "node:url"
 
-import { WebSocketServer as wssv } from "ws";
+import { ipcMain } from "electron"
+import { WebSocketServer as wssv } from "ws"
 
-import path from "node:path";
+import path from "node:path"
 
 import { 
 	files, mimeTypes, IP, chatlogs, users,
@@ -12,15 +13,15 @@ import {
 	checkIP, systemMessage, spawnGordon
 } from "./constants.js"
 
-const server = http.createServer();
+export const server = http.createServer();
 
-const sockets = {
+export const sockets = {
 	public: new wssv({ noServer: true }),
 	red: new wssv({ noServer: true }),
 	blue: new wssv({ noServer: true }),
 }
 
-function launchServer (port) {
+export function launchServer (port) {
 	/***** HTTP SERVER *****/
 	/***/
 	server.on("request", (req, res) => {

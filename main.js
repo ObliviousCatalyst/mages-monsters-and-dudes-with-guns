@@ -1,10 +1,13 @@
-import { BrowserWindow , app , ipcMain } from 'electron'
 import path from "node:path"
 import { fork } from "node:child_process"
 
+import { BrowserWindow , app , ipcMain } from "electron"
+
+import { launchServer } from "./servers.js"
+
 const __dirname = import.meta.dirname
 
-const serverProcess = fork("./servers.js")
+//const serverProcess = fork("./servers.js")
 
 let win
 
@@ -24,7 +27,7 @@ function createWindow () {
 app.whenReady().then(() => createWindow())
 
 ipcMain.on("start", (event,val) => {
-	serverProcess.send(["start_server",val])
+	launchServer(val)
 	win.loadFile("./serverside_ui/control panel.html")
 })
 
@@ -32,6 +35,6 @@ ipcMain.on("spawnG", () => {
 	// serverProcess.send(["spawn gordon"])
 })
 
-serverProcess.on("message", (msg) => {
+// serverProcess.on("message", (msg) => {
 	
 // })
