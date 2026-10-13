@@ -1,12 +1,12 @@
 # this document is for brainstorming damage types
 
 * primary
+	- neutral - stuff that doesn't have meaningful weaknesses or resistances
 	- energy - stuff like flammenwerfer and spells
 	- blunt - bonk
 	- slashing - sword when not stab
-	- peircing - stab and gun
+	- piercing - stab and gun
 	- blast - kaboom
-	- true - used for stuff that doesnt have weakneses or resistances
 	- arcana - magic
 
 
