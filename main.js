@@ -25,7 +25,7 @@ app.whenReady().then(() => createWindow())
 
 ipcMain.on("start", (event,val) => {
 	serverProcess.send(["start_server",val])
-	win.loadFile("./serverside_ui/control pannel.html")
+	win.loadFile("./serverside_ui/control panel.html")
 })
 
 ipcMain.on("spawnG", () => {

@@ -12,7 +12,7 @@ import path from "node:path";
 /***** SETUP *****/
 /***/
 
-// now realising that using fs to import assest might come back to bite me in the ass
+// now realizing that using fs to import assets might come back to bite me in the ass
 const files = {
 	landing: {
 		html: fs.readFileSync("./clientside/ui/landing.html"),
@@ -90,17 +90,17 @@ const sockets = {
 
 /***** IMPORTANT FUNCTIONS *****/
 
-function checkExistance(ip, username) {
+function checkExistence(ip, username) {
 	function checkProperty(key, value) {
 		let playerEmpty = false
 		let specEmpty = false
 		if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
 			playerEmpty = true 
-			console.log("set playerempty")
+			console.log("set player empty")
 		}
 		if (users.spectators == []) { 
 			specEmpty = true 
-			console.log("set specempty")
+			console.log("set spec empty")
 		}
 		if (playerEmpty && specEmpty) {
 			console.log("both empty")
@@ -252,7 +252,7 @@ function launchServer (port) {
 					console.log("requested to create a user that already exists")
 				}
 
-				if (checkExistance(req.socket.remoteAddress,parsed[1])) {
+				if (checkExistence(req.socket.remoteAddress,parsed[1])) {
 					console.log("1st")
 					fail()
 					break;
@@ -307,7 +307,8 @@ function launchServer (port) {
 		if (!keepOpen) res.end()
 	})
 
-	/***** WEBSOCKET HANDELER *****/
+	/***** WEBSOCKET HANDLER *****/
+	/***/
 	// i know naming your variables a single letter is bad practice but i cannot be fucked to come up with actual names right now
 	sockets.public.on("connection", (v,req) => {
 		console.log("connected to public socket")

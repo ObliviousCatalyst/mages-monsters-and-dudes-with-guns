@@ -25,29 +25,29 @@ html,body {
 	display: flex;
 }
 
-.main-collum {
+.main-column {
 	height: 100%;
 	float: left;
 }
 
-#collum-1 {
+#column-1 {
 	width: 25vh;
 }
 
-#collum-2 {
+#column-2 {
 	width: 70vh;
 }
 
-#collum-3 {
+#column-3 {
 	width: 15vh;
 }
 
-#collum-4 {
+#column-4 {
 	flex-grow: 100;
 	min-width: 32px;
 }
 
-#collum-5 {
+#column-5 {
 	width: 20vh;
 }
 
@@ -116,7 +116,7 @@ iframe {
 	background-color: red;
 }
 
-#collum-5 {
+#column-5 {
 	background-color: gray;
 }
 
