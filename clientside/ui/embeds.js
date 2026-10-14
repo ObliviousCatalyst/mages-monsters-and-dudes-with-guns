@@ -1,6 +1,6 @@
 async function getHtml (name) {
-	res = await fetch(name)
-	text = await res.text()
+	let res = await fetch(name)
+	let text = await res.text()
 	return text
 }
 
