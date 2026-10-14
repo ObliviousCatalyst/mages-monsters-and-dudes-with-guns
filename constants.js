@@ -60,6 +60,10 @@ export const board = new keyClass.board(7, 7)
 
 export const entities = new keyClass.entityList()
 
+/**
+ * @class
+ * @extends {EventEmitter}
+ */
 export const globalUpdate = new class extends EventEmitter {
 	constructor() {
 		super()
@@ -67,8 +71,19 @@ export const globalUpdate = new class extends EventEmitter {
 }
 
 /**
+ * updates the current game state for clients
+ * @event globalUpdate#game-update
+ */
+
+/**
+ * updates the chat for clients
+ * @event globalUpdate#chat-update
+ */
+
+/**
  * THIS IS TEMPORARY
  * REMOVE THIS FUNCTION ASAP
+ * @emits globalUpdate#game-update
  */
 export function spawnGordon () {
 	board[5][5] = entities.spawnUnit(cards.gordon)
@@ -150,6 +165,7 @@ export function checkIP (ip) {
 /**
  * sends a chat message from the system
  * @param {string} msg 
+ * @emits globalUpdate#chat-update
  */
 export function systemMessage (msg) {
 	chatlogs.push(["System", msg, "yellow"])

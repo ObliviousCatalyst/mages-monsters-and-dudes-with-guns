@@ -1,7 +1,14 @@
+/**
+ * @class
+ */
 export class card {
 	assets = {}
 }
 
+/**
+ * @class
+ * @extends {card}
+ */
 export class unit extends card {
 	/**
 	 * @type {{
@@ -78,7 +85,7 @@ export class unitAction {
 	 * @param {string} name 
 	 * @param {string} description 
 	 * @param {unitActionMeta} meta
-	 * @param {function (...any): void} method  
+	 * @param {function (...): void} method  
 	 */
 	constructor (name,description,meta,method) {
 		this.name = name
