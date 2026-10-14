@@ -199,4 +199,6 @@ export function launchServer (port) {
 	});
 }
 
+ipcMain.on("spawnG", () => {
+	spawnGordon()
 })
