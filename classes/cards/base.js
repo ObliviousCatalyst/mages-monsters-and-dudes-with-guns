@@ -2,6 +2,7 @@
  * @class
  */
 export class card {
+	name
 	assets = {}
 }
 
