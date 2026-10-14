@@ -133,7 +133,7 @@ export class board {
 	 */
 	createPointer (reference,...position) {
 		// initial checks
-		let TErr = new TypeError("all argumets of createPointer() must be integers")
+		let TErr = new TypeError("all arguments of createPointer() must be integers")
 		if (!Number.isInteger(reference)) throw TErr
 		position.forEach(item => {
 			if (!Number.isInteger(item)) throw TErr
@@ -166,7 +166,7 @@ export class board {
 	 * @param {[object, ...]} destination 
 	 */
 	transferPointer (target, destination) {
-		// inital checks
+		// initial checks
 		let TErr = new TypeError("parameters of transfer pointer must be arrays")
 		if (typeof target !== "object" || typeof destination !== "object") throw TErr
 		if (!Array.isArray(target) || !Array.isArray(destination)) throw TErr
@@ -209,7 +209,7 @@ export class entityList {
 	}
 
 	/**
-	 * create an obital and return a pointer to that orbital's position in the entity list 
+	 * create an orbital and return a pointer to that orbital's position in the entity list 
 	 * @param {cards.base.orbit} source 
 	 * @param {...*} args 
 	 * @returns {entityPointer}
