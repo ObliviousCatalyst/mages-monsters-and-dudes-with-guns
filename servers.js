@@ -40,74 +40,75 @@ export function launchServer (port) {
 		
 		switch (parsed[0]) {
 			case "":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.landing.html);
-			break;
+				res.setHeader("Content-type", "text/html")
+				res.write(files.landing.html)
+			break
 
 			case "error.html":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.error.html);
-			break;
+				res.setHeader("Content-type", "text/html")
+				res.write(files.error.html)
+			break
 			
 			case "main.html":
 				if(checkExistence(req.socket.remoteAddress)) {
-					res.setHeader("Content-type", "text/html");
-					res.write(files.main.html);
+					res.setHeader("Content-type", "text/html")
+					res.write(files.main.html)
 				}
 				else {
 					res.statusCode = 403
 				}
 			break;
+			break
 
 			case "grid.html":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.grid.html);
-			break;
+				res.setHeader("Content-type", "text/html")
+				res.write(files.grid.html)
+			break
 
 			case "orbit.html":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.orbit.html);
-			break;
+				res.setHeader("Content-type", "text/html")
+				res.write(files.orbit.html)
+			break
 
 			case "chat.html":
-				res.setHeader("Content-type", "text/html");
-				res.write(files.chat.html);
-			break;
+				res.setHeader("Content-type", "text/html")
+				res.write(files.chat.html)
+			break
 
 			case "landing.css":
-				res.setHeader("Content-type", "text/css");
+				res.setHeader("Content-type", "text/css")
 				res.write(files.landing.css)
-			break;
+			break
 
 			case "main.css":
-				res.setHeader("Content-type", "text/css");
-				res.write(files.main.css);
-			break;
+				res.setHeader("Content-type", "text/css")
+				res.write(files.main.css)
+			break
 
 			case "grid.css":
-				res.setHeader("Content-type", "text/css");
-				res.write(files.grid.css);
-			break;
+				res.setHeader("Content-type", "text/css")
+				res.write(files.grid.css)
+			break
 
 			case "redOrbit.css":
-				res.setHeader("Content-type", "text/css");
-				res.write(files.orbit.redCss);
-			break;
+				res.setHeader("Content-type", "text/css")
+				res.write(files.orbit.redCss)
+			break
 
 			case "chat.css":
-				res.setHeader("Content-type", "text/css");
-				res.write(files.chat.css);
-			break;
+				res.setHeader("Content-type", "text/css")
+				res.write(files.chat.css)
+			break
 
 			case "landing.js":
 				res.setHeader("Content-type", "text/javascript")
 				res.write(files.landing.js)
-			break;
+			break
 
 			case "global.js": 
 				res.setHeader("Content-type", "text/javascript")
 				res.write(files.main.js)
-			break;
+			break
 
 			case "chat.js":
 				res.setHeader("Content-type", "text/javascript")
