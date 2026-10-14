@@ -72,7 +72,7 @@ export const globalUpdate = new class extends EventEmitter {
  */
 export function spawnGordon () {
 	board[5][5] = entities.spawnUnit(cards.gordon)
-	globalUpdate.emit("update-game")
+	globalUpdate.emit("game-update")
 }
 
 
@@ -155,3 +155,4 @@ export function systemMessage (msg) {
 	chatlogs.push(["System", msg, "yellow"])
 	globalUpdate.emit("chat-update")
 } 
+
