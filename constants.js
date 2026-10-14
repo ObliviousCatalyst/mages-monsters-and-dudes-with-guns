@@ -21,6 +21,7 @@ export const files = {
 		html: fs.readFileSync("./clientside/ui/main.html"),
 		css: fs.readFileSync("./clientside/ui/main.css"),
 		js: fs.readFileSync("./clientside/ui/global.js"),
+		embeds: fs.readFileSync("./clientside/ui/embeds.js")
 	},
 	grid: {
 		html: fs.readFileSync("./clientside/ui/grid.html"),
@@ -171,4 +172,3 @@ export function systemMessage (msg) {
 	chatlogs.push(["System", msg, "yellow"])
 	globalUpdate.emit("chat-update")
 } 
-
