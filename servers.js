@@ -33,12 +33,11 @@ export function launchServer (port) {
 		console.log("URL:",url)
 
 		let parsed = path.parse(url.pathname)
-		let splitPath = parsed.dir.split("/")
+		let splitPath = parsed.base.split("/")
 		let keepOpen = false
 		if (splitPath[0] === "" && parsed.length > 1) {
 			splitPath.shift()
 		}
-		console.log("ext",parsed.ext)
 		if (parsed.ext !== "" && [".html",".css",".js"].includes(parsed.ext)) {
 			res.setHeader("Content-type", mimeTypes[parsed.ext])
 			let temp = structuredClone(parsed.ext).split("")
@@ -48,7 +47,7 @@ export function launchServer (port) {
 			res.end()
 			return
 		}
-
+		console.log(splitPath)
 		switch (splitPath[0]) {
 			case "":
 				res.setHeader("Content-type", "text/html")

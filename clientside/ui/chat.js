@@ -1,7 +1,10 @@
-const input = document.getElementById("chat-input")
-const sendButton = document.getElementById("send")
-const chatDisp = document.getElementById("chat-log")
+import { sockets } from "./global.js"
 
+let input = document.getElementById("chat-input")
+let sendButton = document.getElementById("send")
+let chatDisp = document.getElementById("chat-log")
+
+console.log(input)
 
 function writeMessage(type, subtype, data, callback) {
 	let temp = {
@@ -16,7 +19,7 @@ function writeMessage(type, subtype, data, callback) {
 	return JSON.stringify(temp)
 }
 
-const sockets = parent.sockets
+// const sockets = parent.sockets
 
 sockets.public.onmessage = (event) => {
 	console.log(event.data)

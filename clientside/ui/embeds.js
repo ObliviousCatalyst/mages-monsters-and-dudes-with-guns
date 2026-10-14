@@ -4,7 +4,3 @@ async function getHtml (name) {
 	return text
 }
 
-let board = document.getElementById("board-inner")
-let boardHTML = await getHtml("./grid.html")
-console.log(boardHTML)
-board.innerHTML = boardHTML
