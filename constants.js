@@ -25,6 +25,7 @@ export const files = {
 	},
 	js: {
 		landing: fs.readFileSync("./clientside/ui/landing.js"),
+		index: fs.readFileSync("./clientside/ui/index.js"),
 		global: fs.readFileSync("./clientside/ui/global.js"),
 		embeds: fs.readFileSync("./clientside/ui/embeds.js"),
 		grid: fs.readFileSync("./clientside/ui/grid.js"),
