@@ -100,12 +100,12 @@ export function launchServer (port) {
 			break;
 
 			case "landing.js":
-				res.setHeader("Content-type", "text/js");
+				res.setHeader("Content-type", "text/javascript")
 				res.write(files.landing.js)
 			break;
 
 			case "global.js": 
-				res.setHeader("Content-type", "text/js");
+				res.setHeader("Content-type", "text/javascript")
 				res.write(files.main.js)
 			break;
 

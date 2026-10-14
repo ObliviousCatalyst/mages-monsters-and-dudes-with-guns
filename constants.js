@@ -43,7 +43,7 @@ export const files = {
 export const mimeTypes = {
 	".html" : "text/html",
 	".css" : "text/css",
-	".js" : "text/js",
+	".js" : "text/javascript",
 	".json" : "application/json",
 	".png" : "image/png",
 	".jpg" : "image/jpeg",
