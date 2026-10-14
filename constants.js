@@ -78,9 +78,14 @@ export function spawnGordon () {
 
 
 /***** IMPORTANT FUNCTIONS *****/
-
-export function checkExistence(ip, username) {
-	function checkProperty(key, value) {
+/**
+ * check if a user exists by username/IP address
+ * @param {string} ip 
+ * @param {string} username 
+ * @returns {boolean}
+ */
+export function checkExistence (ip, username) {
+	function checkProperty (key, value) {
 		let playerEmpty = false
 		let specEmpty = false
 		if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
@@ -122,6 +127,11 @@ export function checkExistence(ip, username) {
 	return false
 }
 
+/**
+ * checks who an IP address belongs to (among active users)
+ * @param {string} ip 
+ * @returns {string}
+ */
 export function checkIP (ip) {
 	if (ip === users.players.red.ip) {
 		return "player:red"
@@ -137,6 +147,10 @@ export function checkIP (ip) {
 	return "none"
 }
 
+/**
+ * sends a chat message from the system
+ * @param {string} msg 
+ */
 export function systemMessage (msg) {
 	chatlogs.push(["System", msg, "yellow"])
 	globalUpdate.emit("chat-update")

@@ -21,6 +21,10 @@ export const sockets = {
 	blue: new wssv({ noServer: true }),
 }
 
+/**
+ * self explanatory
+ * @param {number} port 
+ */
 export function launchServer (port) {
 	/***** HTTP SERVER *****/
 	/***/

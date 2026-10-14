@@ -1,13 +1,10 @@
 import path from "node:path"
-import { fork } from "node:child_process"
 
 import { BrowserWindow , app , ipcMain } from "electron"
 
 import { launchServer } from "./servers.js"
 
 const __dirname = import.meta.dirname
-
-//const serverProcess = fork("./servers.js")
 
 let win
 
@@ -32,9 +29,5 @@ ipcMain.on("start", (event,val) => {
 })
 
 ipcMain.on("spawnG", () => {
-	// serverProcess.send(["spawn gordon"])
-})
-
-// serverProcess.on("message", (msg) => {
 	
-// })
+})
