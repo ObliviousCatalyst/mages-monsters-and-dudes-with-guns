@@ -199,7 +199,4 @@ export function launchServer (port) {
 	});
 }
 
-process.on("message", (msg) => {
-	if (msg[0] === "start_server") launchServer(msg[1])
-	if (msg[0] === "spawn gordon") spawnGordon()
 })

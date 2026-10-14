@@ -27,7 +27,3 @@ ipcMain.on("start", (event,val) => {
 	launchServer(val)
 	win.loadFile("./serverside_ui/control panel.html")
 })
-
-ipcMain.on("spawnG", () => {
-	
-})
