@@ -76,8 +76,8 @@ export const globalUpdate = new class extends EventEmitter {
  */
 
 /**
- * THIS IS TEMPORARY
- * REMOVE THIS FUNCTION ASAP
+ * THIS IS TEMPORARY!
+ * REMOVE THIS FUNCTION ASAP!
  * @emits globalUpdate#game-update
  */
 export function spawnGordon () {
