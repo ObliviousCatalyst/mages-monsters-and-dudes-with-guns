@@ -81,9 +81,6 @@ export class unitAction {
 	 * @param {function (...any): void} method  
 	 */
 	constructor (name,description,meta,method) {
-		[name,description,meta,method].forEach((that) => {
-			if (typeof that === "undefined") throw new TypeError("params of new unitAction() must all be defined")
-		})
 		this.name = name
 		this.description = description
 		this.meta = meta
