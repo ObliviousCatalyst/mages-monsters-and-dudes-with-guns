@@ -13,7 +13,6 @@ export const files = {
 		landing: fs.readFileSync("./clientside/ui/landing.html"),
 		error: fs.readFileSync("./clientside/ui/error.html"),
 		main: fs.readFileSync("./clientside/ui/main.html"),
-		grid: fs.readFileSync("./clientside/ui/grid.html"),
 		chat: fs.readFileSync("./clientside/ui/chat.html"),
 		orbit: fs.readFileSync("./clientside/ui/orbit.html"),
 	},
@@ -28,6 +27,7 @@ export const files = {
 		landing: fs.readFileSync("./clientside/ui/landing.js"),
 		global: fs.readFileSync("./clientside/ui/global.js"),
 		embeds: fs.readFileSync("./clientside/ui/embeds.js"),
+		grid: fs.readFileSync("./clientside/ui/grid.js"),
 		chat: fs.readFileSync("./clientside/ui/chat.js"),
 	},
 	fonts: {
