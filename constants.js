@@ -9,32 +9,26 @@ import * as cards from "./classes/cards.js"
 
 // now realizing that using fs to import assets might come back to bite me in the ass
 export const files = {
-	landing: {
-		html: fs.readFileSync("./clientside/ui/landing.html"),
-		css: fs.readFileSync("./clientside/ui/landing.css"),
-		js: fs.readFileSync("./clientside/ui/landing.js")
+	html: {
+		landing: fs.readFileSync("./clientside/ui/landing.html"),
+		error: fs.readFileSync("./clientside/ui/error.html"),
+		main: fs.readFileSync("./clientside/ui/main.html"),
+		grid: fs.readFileSync("./clientside/ui/grid.html"),
+		chat: fs.readFileSync("./clientside/ui/chat.html"),
+		orbit: fs.readFileSync("./clientside/ui/orbit.html"),
 	},
-	error: {
-		html: fs.readFileSync("./clientside/ui/error.html"),
+	css: {
+		landing: fs.readFileSync("./clientside/ui/landing.css"),
+		main: fs.readFileSync("./clientside/ui/main.css"),
+		grid: fs.readFileSync("./clientside/ui/grid.css"),
+		chat: fs.readFileSync("./clientside/ui/chat.css"),
+		redOrbit: fs.readFileSync("./clientside/ui/redOrbit.css"),
 	},
-	main: {
-		html: fs.readFileSync("./clientside/ui/main.html"),
-		css: fs.readFileSync("./clientside/ui/main.css"),
-		js: fs.readFileSync("./clientside/ui/global.js"),
-		embeds: fs.readFileSync("./clientside/ui/embeds.js")
-	},
-	grid: {
-		html: fs.readFileSync("./clientside/ui/grid.html"),
-		css: fs.readFileSync("./clientside/ui/grid.css"),
-	},
-	chat: {
-		html: fs.readFileSync("./clientside/ui/chat.html"),
-		css: fs.readFileSync("./clientside/ui/chat.css"),
-		js: fs.readFileSync("./clientside/ui/chat.js"),
-	},
-	orbit: {
-		html: fs.readFileSync("./clientside/ui/orbit.html"),
-		redCss: fs.readFileSync("./clientside/ui/redOrbit.css"),
+	js: {
+		landing: fs.readFileSync("./clientside/ui/landing.js"),
+		global: fs.readFileSync("./clientside/ui/global.js"),
+		embeds: fs.readFileSync("./clientside/ui/embeds.js"),
+		chat: fs.readFileSync("./clientside/ui/chat.js"),
 	},
 	fonts: {
 		firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),

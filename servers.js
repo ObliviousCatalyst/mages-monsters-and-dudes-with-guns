@@ -30,94 +30,30 @@ export function launchServer (port) {
 	/***/
 	server.on("request", (req, res) => {
 		let url = new URL(req.url, "http://0.0.0.0")
-		console.log(url)
+		console.log("URL:",url)
 
-		let parsed = url.pathname.split("/")
+		let parsed = path.parse(url.pathname)
+		let splitPath = parsed.dir.split("/")
 		let keepOpen = false
-		if (parsed[0] === "" && parsed.length > 1) {
-			parsed.shift()
+		if (splitPath[0] === "" && parsed.length > 1) {
+			splitPath.shift()
 		}
-		
-		switch (parsed[0]) {
+		console.log("ext",parsed.ext)
+		if (parsed.ext !== "" && [".html",".css",".js"].includes(parsed.ext)) {
+			res.setHeader("Content-type", mimeTypes[parsed.ext])
+			let temp = structuredClone(parsed.ext).split("")
+			temp.shift()
+			let rawExt = temp.join("")
+			res.write(files[rawExt][parsed.name])
+			res.end()
+			return
+		}
+
+		switch (splitPath[0]) {
 			case "":
 				res.setHeader("Content-type", "text/html")
-				res.write(files.landing.html)
+				res.write(files.html.landing)
 			break
-
-			case "error.html":
-				res.setHeader("Content-type", "text/html")
-				res.write(files.error.html)
-			break
-			
-			case "main.html":
-				if(checkExistence(req.socket.remoteAddress)) {
-					res.setHeader("Content-type", "text/html")
-					res.write(files.main.html)
-				}
-				else {
-					res.statusCode = 403
-				}
-			break
-
-			case "grid.html":
-				res.setHeader("Content-type", "text/html")
-				res.write(files.grid.html)
-			break
-
-			case "orbit.html":
-				res.setHeader("Content-type", "text/html")
-				res.write(files.orbit.html)
-			break
-
-			case "chat.html":
-				res.setHeader("Content-type", "text/html")
-				res.write(files.chat.html)
-			break
-
-			case "landing.css":
-				res.setHeader("Content-type", "text/css")
-				res.write(files.landing.css)
-			break
-
-			case "main.css":
-				res.setHeader("Content-type", "text/css")
-				res.write(files.main.css)
-			break
-
-			case "grid.css":
-				res.setHeader("Content-type", "text/css")
-				res.write(files.grid.css)
-			break
-
-			case "redOrbit.css":
-				res.setHeader("Content-type", "text/css")
-				res.write(files.orbit.redCss)
-			break
-
-			case "chat.css":
-				res.setHeader("Content-type", "text/css")
-				res.write(files.chat.css)
-			break
-
-			case "landing.js":
-				res.setHeader("Content-type", "text/javascript")
-				res.write(files.landing.js)
-			break
-
-			case "global.js": 
-				res.setHeader("Content-type", "text/javascript")
-				res.write(files.main.js)
-			break
-
-			case "embeds.js": 
-				res.setHeader("Content-type", "text/javascript")
-				res.write(files.main.embeds)
-			break
-
-			case "chat.js":
-				res.setHeader("Content-type", "text/javascript")
-				res.write(files.chat.js)
-			break;
 
 			case "fira_Code":
 				res.setHeader("Content-type", "font/ttf")
@@ -132,15 +68,15 @@ export function launchServer (port) {
 					console.log("requested to create a user that already exists")
 				}
 
-				if (checkExistence(req.socket.remoteAddress,parsed[1])) {
+				if (checkExistence(req.socket.remoteAddress,splitPath[1])) {
 					console.log("1st")
 					fail()
 					break;
 				}
 
-				if(parsed[2] === "spectator") {
+				if(splitPath[2] === "spectator") {
 					console.log("adding spectator")
-					users.addSpectator(parsed[1],req.socket.remoteAddress)
+					users.addSpectator(splitPath[1],req.socket.remoteAddress)
 					
 					console.log("users: ",users)
 					console.log("spectators: ", users.spectators)
@@ -149,7 +85,7 @@ export function launchServer (port) {
 					break;
 				}
 				
-				if (JSON.stringify(users.players[parsed[2]]) !== JSON.stringify({})) {
+				if (JSON.stringify(users.players[splitPath[2]]) !== JSON.stringify({})) {
 					console.log("3rd")
 					fail()
 					break;
@@ -157,9 +93,9 @@ export function launchServer (port) {
 
 				console.log("case was not broken")
 				
-				users.addPlayer(parsed[1],req.socket.remoteAddress,parsed[2])
+				users.addPlayer(splitPath[1],req.socket.remoteAddress,splitPath[2])
 				res.statusCode = 201
-				systemMessage(`user: "${parsed[1]}" joined the game`)
+				systemMessage(`user: "${splitPath[1]}" joined the game`)
 			}break;
 
 			case "images":
