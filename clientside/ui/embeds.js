@@ -4,3 +4,7 @@ async function getHtml (name) {
 	return text
 }
 
+let chat = document.getElementById("chat")
+let chatHtml = await getHtml("chat.html")
+console.log(chatHtml)
+chat.innerHTML = chatHtml
