@@ -57,7 +57,6 @@ export function launchServer (port) {
 				else {
 					res.statusCode = 403
 				}
-			break;
 			break
 
 			case "grid.html":
@@ -108,6 +107,11 @@ export function launchServer (port) {
 			case "global.js": 
 				res.setHeader("Content-type", "text/javascript")
 				res.write(files.main.js)
+			break
+
+			case "embeds.js": 
+				res.setHeader("Content-type", "text/javascript")
+				res.write(files.main.embeds)
 			break
 
 			case "chat.js":
