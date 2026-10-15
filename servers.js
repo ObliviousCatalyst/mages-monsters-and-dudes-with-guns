@@ -29,7 +29,7 @@ export function launchServer (port) {
 	/***** HTTP SERVER *****/
 	/***/
 	server.on("request", (req, res) => {
-		let url = new URL(req.url, "http://0.0.0.0")
+		let url = new URL(req.url, `http://${IP}`)
 		console.log("URL:",url)
 
 		let parsed = path.parse(url.pathname)
