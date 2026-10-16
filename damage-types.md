@@ -17,4 +17,5 @@
 	- electric - zap
 	- psychic - brain damage
 	- rads - radiation
-	
+	- necrotic - lifestealing stuff
+	- sonic - loud stuff
