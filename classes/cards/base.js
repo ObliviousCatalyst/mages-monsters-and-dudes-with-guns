@@ -25,30 +25,34 @@ export class unit extends card {
 		hp: 100,
 		atk: 20,
 		alt: 20,
-		speed: 2,
+		speed: 0,
 		stamina: 10,
 		slots: 2,
 	}
-	actions = [
-		new unitAction("move","move this unit", {
-				target: "none", 
-				movement: "standard", 
-				movementDist: "speed"
-			}, () => {	
-		})
-	]
+	actions = []
 	cost = {
-		food,
-		metal,
-		mana,
+		food: 1,
+		metal: 1,
+		mana: 1,
 	}
 	advantage = {
-		strong,
-		weak,
+		strong: [],
+		weak: [],
 	}
 }
 
-export class action extends card {
+export class StdUnit extends unit {
+	constructor () {
+		this.actions.push(new unitAction("move","move this unit", {
+			target: "none", 
+			movement: "standard", 
+			movementDist: "speed"
+		}, () => {	
+		}))
+	}
+}
+
+export class actionCard extends card {
 	
 }
 
@@ -56,7 +60,7 @@ export class item extends card {
 	
 }
 
-export class orbit extends card {
+export class orbital extends card {
 	
 }
 /**
