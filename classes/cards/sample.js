@@ -1,7 +1,7 @@
 import { card, unit, action, item, StdUnit, unitAction } from "./base.js"
 
 export class gordon extends StdUnit {
-	constructor() {
+	constructor () {
 		// types
 		this.size = "macro"
 		this.tier = "A"
@@ -31,7 +31,7 @@ export class gordon extends StdUnit {
 			damageTypePrime: "blunt",
 			damageTypeSec: "neutral",
 		}, () => {
-			
+
 		}))
 
 		this.advantage.strong = ["blunt", "sharp", "poison", "rads"]

@@ -218,6 +218,6 @@ export class entityList {
 		if (!(source.prototype instanceof cards.base.orbit)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.orbit")
 		let index = this.orbitals.push(new source(...args))
 		index--
-		return new entityPointer("orbitals",index)
+		return new entityPointer("orbitals", index)
 	}
 }
