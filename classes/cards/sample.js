@@ -1,4 +1,4 @@
-import { card, unit, action, item, StdUnit, unitAction } from "./base.js"
+import { card, unit, actionCard, item, StdUnit, unitAction } from "./base.js"
 
 export class gordon extends StdUnit {
 	constructor () {
