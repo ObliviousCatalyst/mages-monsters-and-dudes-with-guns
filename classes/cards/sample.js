@@ -1,6 +1,6 @@
-import { card, unit, action, item } from "./base.js"
+import { card, unit, action, item, StdUnit, unitAction } from "./base.js"
 
-export class gordon extends unit {
+export class gordon extends StdUnit {
 	constructor() {
 		// types
 		this.size = "macro"
@@ -19,19 +19,22 @@ export class gordon extends unit {
 
 		// assets
 		this.assets.image
-		this.assets.icon
+		this.assets.icon = "gordon.jpg"
 
 		// advanced
-		this.actions = {
-			kick: {
-				description: "",
-				func () {
-					
-				}
-			}
-		};
+		this.actions.push(new unitAction("kick", "self eplanetory", {
+			target: "opponent",
+			movement: "none",
+			movementDist: "implicit",
+			power: 2,
+			damageSrc: "atk",
+			damageTypePrime: "blunt",
+			damageTypeSec: "neutral",
+		}, () => {
+			
+		}))
 
-		this.advantage.strong = ["blunt", "sharp", "poison", "radiation"]
+		this.advantage.strong = ["blunt", "sharp", "poison", "rads"]
 		this.advantage.weak = ["dark", "strange"]
 	}
 
