@@ -3,6 +3,7 @@ import path from "node:path"
 import { BrowserWindow , app , ipcMain } from "electron"
 
 import { launchServer } from "./servers.js"
+import { globalUpdate } from "./constants.js"
 
 const __dirname = import.meta.dirname
 
@@ -26,4 +27,8 @@ app.whenReady().then(() => createWindow())
 ipcMain.on("start", (event,val) => {
 	launchServer(val)
 	win.loadFile("./serverside_ui/control panel.html")
+})
+
+globalUpdate.on("chat-update",() => {
+	console.log("chat update")
 })
