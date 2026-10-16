@@ -39,6 +39,7 @@ export class unit extends card {
 		strong: [],
 		weak: [],
 	}
+	faction = "none"
 }
 
 export class StdUnit extends unit {
@@ -78,9 +79,10 @@ export class unitAction {
 	 * @property {"mobility" | "attack" | "support" | "other"} category
 	 * @property {"none" | "standard" | "linear" | "rush" | "recoil" | "teleport"} [movement]
 	 * @property {"speed" | "implicit" | number} [movementDist]
-	 * @property {number | "atk" | "alt"} [damage]
-	 * @property {"neutral" | "blunt" | "slashing" | "piercing" | "blast" | "energy" | "arcana"} damageTypePrime
-	 * @property {"heat" | "cold" | "water" | "electric" | "psychic" | "rads"} damageTypeSec
+	 * @property {number} [power]
+	 * @property {"atk" | "alt" | "fixed"} [damageSrc]
+	 * @property {"neutral" | "blunt" | "slashing" | "piercing" | "blast" | "energy" | "arcana"} [damageTypePrime]
+	 * @property {"neutral" | "heat" | "cold" | "water" | "electric" | "psychic" | "rads"} [damageTypeSec]
 	 */
 
 	/**
