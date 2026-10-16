@@ -34,9 +34,7 @@ export class unit extends card {
 				target: "none", 
 				movement: "standard", 
 				movementDist: "speed"
-			},
-			() => {
-				
+			}, () => {	
 		})
 	]
 	cost = {
