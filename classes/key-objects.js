@@ -55,11 +55,11 @@ export class userlist {
 		blue: {},
 	}
 
-	addSpectator(username,ip) {
+	addSpectator (username,ip) {
 		this.spectators.push(new user.spectator(username,ip))
 	}
 
-	addPlayer(username,ip,team){
+	addPlayer (username,ip,team) {
 		this.players[team] = new user.player(username,ip)
 	}
 }
@@ -69,7 +69,7 @@ export class board {
 	 * @param {number} width 
 	 * @param {number} height 
 	 */
-	constructor(height = 1, width = 1) {
+	constructor (height = 1, width = 1) {
 		let wip = {
 			height: height,
 			width: width,
@@ -98,7 +98,7 @@ export class board {
 			})
 		}
 		return new Proxy(wip, {
-			get(target, property, receiver) {
+			get (target, property, receiver) {
 				let intProp = parseInt(property)
 				if (intProp !== NaN) {
 					if (intProp >= 0 && intProp < height) {
@@ -109,7 +109,7 @@ export class board {
 				return Reflect.get(target, property, receiver)
 			},
 
-			set(target, property, value, receiver) {
+			set (target, property, value, receiver) {
 				return Reflect.set(target, property, value, receiver)
 			}
 		})
@@ -220,6 +220,4 @@ export class entityList {
 		index--
 		return new entityPointer("orbitals",index)
 	}
-
-	spawn
 }
