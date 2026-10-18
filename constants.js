@@ -17,6 +17,7 @@ export const files = {
 		main: fs.readFileSync(`./${UIDir}/main.html`),
 		chat: fs.readFileSync(`./${UIDir}/chat.html`),
 		orbit: fs.readFileSync(`./${UIDir}/orbit.html`),
+		debugger: fs.readFileSync(`./${UIDir}/debugger.html`),
 	},
 	css: {
 		landing: fs.readFileSync(`./${UIDir}/landing.css`),
