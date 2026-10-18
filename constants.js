@@ -1,11 +1,20 @@
 import EventEmitter from "node:events"
 import fs from "node:fs"
+import { parseArgs } from "node:util"
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
 
 /***** SETUP *****/
 /***/
+
+export const procArgs = parseArgs({
+	args: process.argv.slice(2),
+	options: {
+		debug: { type: "boolean", short: "d"},
+		port: { type: "string", default: "4000", multiple: false },
+	}
+})
 
 export const UIDir = "clientside/ui"
 
@@ -17,7 +26,6 @@ export const files = {
 		main: fs.readFileSync(`./${UIDir}/main.html`),
 		chat: fs.readFileSync(`./${UIDir}/chat.html`),
 		orbit: fs.readFileSync(`./${UIDir}/orbit.html`),
-		debugger: fs.readFileSync(`./${UIDir}/debugger.html`),
 	},
 	css: {
 		landing: fs.readFileSync(`./${UIDir}/landing.css`),
@@ -36,7 +44,10 @@ export const files = {
 	},
 	fonts: {
 		firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
-	}
+	},
+	dev: {
+		debugger: fs.readFileSync(`./${UIDir}/debugger.html`),
+	},
 }
 
 export const mimeTypes = {

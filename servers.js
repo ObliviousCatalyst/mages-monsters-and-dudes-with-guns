@@ -10,7 +10,7 @@ import path from "node:path"
 import { 
 	files, mimeTypes, IP, chatlogs, users,
 	board, entities, globalUpdate, checkExistence,
-	checkIP, systemMessage, spawnGordon
+	checkIP, systemMessage, spawnGordon, procArgs,
 } from "./constants.js"
 
 export const server = http.createServer();
@@ -52,6 +52,16 @@ export function launchServer (port) {
 			case "":
 				res.setHeader("Content-type", "text/html")
 				res.write(files.html.landing)
+			break
+
+			case "debug":
+				if (procArgs.values.debug) {
+					res.setHeader("Content-type", "text/html")
+					res.write(files.dev.debugger)
+				}
+				else {
+					res.statusCode = 403
+				}
 			break
 
 			case "fira_Code":
