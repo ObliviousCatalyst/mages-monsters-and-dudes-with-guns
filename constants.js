@@ -7,29 +7,31 @@ import * as cards from "./classes/cards.js"
 /***** SETUP *****/
 /***/
 
+export const UIDir = "clientside/ui"
+
 // now realizing that using fs to import assets might come back to bite me in the ass
 export const files = {
 	html: {
-		landing: fs.readFileSync("./clientside/ui/landing.html"),
-		error: fs.readFileSync("./clientside/ui/error.html"),
-		main: fs.readFileSync("./clientside/ui/main.html"),
-		chat: fs.readFileSync("./clientside/ui/chat.html"),
-		orbit: fs.readFileSync("./clientside/ui/orbit.html"),
+		landing: fs.readFileSync(`./${UIDir}/landing.html`),
+		error: fs.readFileSync(`./${UIDir}/error.html`),
+		main: fs.readFileSync(`./${UIDir}/main.html`),
+		chat: fs.readFileSync(`./${UIDir}/chat.html`),
+		orbit: fs.readFileSync(`./${UIDir}/orbit.html`),
 	},
 	css: {
-		landing: fs.readFileSync("./clientside/ui/landing.css"),
-		main: fs.readFileSync("./clientside/ui/main.css"),
-		grid: fs.readFileSync("./clientside/ui/grid.css"),
-		chat: fs.readFileSync("./clientside/ui/chat.css"),
-		redOrbit: fs.readFileSync("./clientside/ui/redOrbit.css"),
+		landing: fs.readFileSync(`./${UIDir}/landing.css`),
+		main: fs.readFileSync(`./${UIDir}/main.css`),
+		grid: fs.readFileSync(`./${UIDir}/grid.css`),
+		chat: fs.readFileSync(`./${UIDir}/chat.css`),
+		redOrbit: fs.readFileSync(`./${UIDir}/redOrbit.css`),
 	},
 	js: {
-		landing: fs.readFileSync("./clientside/ui/landing.js"),
-		index: fs.readFileSync("./clientside/ui/index.js"),
-		global: fs.readFileSync("./clientside/ui/global.js"),
-		embeds: fs.readFileSync("./clientside/ui/embeds.js"),
-		grid: fs.readFileSync("./clientside/ui/grid.js"),
-		chat: fs.readFileSync("./clientside/ui/chat.js"),
+		landing: fs.readFileSync(`./${UIDir}/landing.js`),
+		index: fs.readFileSync(`./${UIDir}/index.js`),
+		global: fs.readFileSync(`./${UIDir}/global.js`),
+		embeds: fs.readFileSync(`./${UIDir}/embeds.js`),
+		grid: fs.readFileSync(`./${UIDir}/grid.js`),
+		chat: fs.readFileSync(`./${UIDir}/chat.js`),
 	},
 	fonts: {
 		firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
