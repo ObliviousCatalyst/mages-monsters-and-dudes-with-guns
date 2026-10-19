@@ -186,8 +186,7 @@ export function systemMessage (msg) {
 } 
 
 /**
- * get the server(hardware)'s actual IP address
- * @param {Object} nets 
+ * get the server(hardware)'s actual IP address 
  */
 export async function getLocalIp () {
 	// thank god for stack overflow
