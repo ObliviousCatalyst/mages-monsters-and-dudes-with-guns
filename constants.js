@@ -12,7 +12,7 @@ export const procArgs = parseArgs({
 	args: process.argv.slice(2),
 	options: {
 		debug: { type: "boolean", short: "d"},
-		port: { type: "string", default: "4000", multiple: false },
+		port: { type: "string" },
 	}
 })
 
