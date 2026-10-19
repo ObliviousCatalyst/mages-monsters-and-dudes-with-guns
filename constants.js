@@ -1,5 +1,7 @@
 import EventEmitter from "node:events"
 import fs from "node:fs"
+import os from "node:os"
+import dnsPro from "node:dns/promises"
 import { parseArgs } from "node:util"
 
 import * as keyClass from "./classes/key-objects.js"
@@ -61,7 +63,8 @@ export const mimeTypes = {
 	".svg" : "image/svg+xml"
 }
 
-export const IP = "0.0.0.0";
+export const localIP = await getLocalIp()
+export const hostIP = "0.0.0.0";
 export const chatlogs = [["System", "server started", "yellow"]]
 
 export const users = new keyClass.userlist()
@@ -181,3 +184,12 @@ export function systemMessage (msg) {
 	chatlogs.push(["System", msg, "yellow"])
 	globalUpdate.emit("chat-update")
 } 
+
+/**
+ * get the server(hardware)'s actual IP address
+ * @param {Object} nets 
+ */
+export async function getLocalIp () {
+	// thank god for stack overflow
+	return (await dnsPro.lookup(os.hostname(), { family: 4 })).address
+}

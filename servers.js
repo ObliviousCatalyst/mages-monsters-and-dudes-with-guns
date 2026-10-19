@@ -1,14 +1,14 @@
 import http from "node:http"
 import fs from "node:fs"
 import url from "node:url"
+import os from "node:os"
+import path from "node:path"
 
 import { ipcMain } from "electron"
 import { WebSocketServer as wssv } from "ws"
 
-import path from "node:path"
-
 import { 
-	files, mimeTypes, IP, chatlogs, users,
+	files, mimeTypes, hostIP, chatlogs, users,
 	board, entities, globalUpdate, checkExistence,
 	checkIP, systemMessage, spawnGordon, procArgs,
 } from "./constants.js"
@@ -21,6 +21,8 @@ export const sockets = {
 	blue: new wssv({ noServer: true }),
 }
 
+
+
 /**
  * self explanatory
  * @param {number} port 
@@ -29,7 +31,7 @@ export function launchServer (port) {
 	/***** HTTP SERVER *****/
 	/***/
 	server.on("request", (req, res) => {
-		let url = new URL(req.url, `http://${IP}`)
+		let url = new URL(req.url, `http://${hostIP}`)
 		console.log("URL:",url)
 
 		let parsed = path.parse(url.pathname)
@@ -203,7 +205,7 @@ export function launchServer (port) {
 		}
 	})
 
-	server.listen(port, IP, () => {
+	server.listen(port, hostIP, () => {
 		console.log("server running")
 	});
 }

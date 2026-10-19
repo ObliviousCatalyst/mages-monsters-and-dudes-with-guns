@@ -3,7 +3,7 @@ import path from "node:path"
 import { BrowserWindow , app , ipcMain } from "electron"
 
 import { launchServer } from "./servers.js"
-import { globalUpdate, procArgs } from "./constants.js"
+import { globalUpdate, procArgs, localIP } from "./constants.js"
 
 const __dirname = import.meta.dirname
 
@@ -21,6 +21,7 @@ function createWindow () {
 			nodeIntegration: false
 		}
 	})
+	console.log("IP:",localIP)
 	let port = parseInt(procArgs.values.port)
 	if (port !== NaN) {
 		launchServer(port)
