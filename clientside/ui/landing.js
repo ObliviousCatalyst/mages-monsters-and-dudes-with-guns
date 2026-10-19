@@ -1,5 +1,3 @@
-//import { error } from "node:console"
-
 let form = document.getElementById("user-create")
 
 form.addEventListener("submit", (event) => {

@@ -136,8 +136,7 @@ export function launchServer (port) {
 
 	/***** WEBSOCKET HANDLER *****/
 	/***/
-	// i know naming your variables a single letter is bad practice but i cannot be fucked to come up with actual names right now
-	sockets.public.on("connection", (v,req) => {
+	sockets.public.on("connection", (ws,req) => {
 		console.log("connected to public socket")
 		function writeMessage(type, subtype, data) {
 			return JSON.stringify({
@@ -148,17 +147,17 @@ export function launchServer (port) {
 		}
 		
 		let initChat = writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update"))
-		v.send(initChat)
+		ws.send(initChat)
 		
 		globalUpdate.addListener("update-chat", () => {
-			v.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+			ws.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
 		}) 
 
 		globalUpdate.on("update-game", () => {
-			v.send(writeMessage("update", "game-state", { board, entities }))
+			ws.send(writeMessage("update", "game-state", { board, entities }))
 		}) 
 			
-		v.on("message", (msg) => {
+		ws.on("message", (msg) => {
 			console.log(msg)
 			let parsed = JSON.parse(msg)
 			console.log(parsed)
@@ -193,8 +192,8 @@ export function launchServer (port) {
 		let path = pathname.split("/")
 		switch(path[1]) {
 			case "public":
-				sockets.public.handleUpgrade(req,sock,head, (v) => {
-					sockets.public.emit("connection", v, req)
+				sockets.public.handleUpgrade(req,sock,head, (ws) => {
+					sockets.public.emit("connection", ws, req)
 				})
 			break;
 
