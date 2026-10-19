@@ -3,5 +3,6 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("signal",{
 	start: (val) => ipcRenderer.send("start", val),
-	spawnGordon: () => ipcRenderer.send("spawnG")
+	spawnGordon: () => ipcRenderer.send("spawnG"),
+	testWS: () => ipcRenderer.send("testWS"),
 })
