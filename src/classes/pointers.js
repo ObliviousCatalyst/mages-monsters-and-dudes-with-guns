@@ -1,4 +1,4 @@
-import { unit } from "./cards/base"
+import { unit } from "./cards/base.js"
 
 export class entityPointer {
 	array
