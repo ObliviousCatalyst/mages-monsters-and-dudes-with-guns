@@ -8,10 +8,14 @@ export class card {
 }
 
 /**
+ * minimal unit base
  * @class
  * @extends {card}
  */
 export class unit extends card {
+	/**
+	 * @type {entityPointer}
+	 */
 	pointer = null
 	/**
 	 * @type {{
@@ -44,6 +48,11 @@ export class unit extends card {
 	faction = "none"
 }
 
+/**
+ * standard unit base
+ * @class 
+ * @extends {unit}
+ */
 export class StdUnit extends unit {
 	constructor () {
 		this.actions.push(new unitAction("move","move this unit", {

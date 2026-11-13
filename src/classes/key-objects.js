@@ -66,6 +66,11 @@ export class userlist {
 	}
 }
 
+/**
+ * @class
+ * @property {number} width
+ * @property {number} height
+ */
 export class board {
 	/**
 	 * @param {number} width 
@@ -163,6 +168,17 @@ export class board {
 	}
 
 	/**
+	 * search for a pointer within self
+	 * @param {entityPointer} ptr 
+	 */
+	searchForPointer (ptr) {
+		for (let pt = 0; pt < this.width ) {
+
+		}
+		Object.entries()
+	}
+
+	/**
 	 * transfer a pointer to another object
 	 * @param {[number, number]} target 
 	 * @param {[object, ...]} destination 
@@ -189,6 +205,18 @@ export class board {
 	 * @param {[number, number]} destination
 	 */
 	transferPointerFrom (target,destination) {
+
+	}
+
+	/**
+	 * move a unit
+	 * @param {entityPointer} obj 
+	 * @param  {...number} destination 
+	 */
+	moveUnit (obj, ...destination) {
+		if (this[obj.expectedX][obj.expectedY] !== obj) {
+
+		}
 
 	}
 }
