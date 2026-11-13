@@ -201,8 +201,6 @@ export async function getLocalIp () {
 export function getProjectDir (startDir = import.meta.dirname) {
 	let pathArr = startDir.split("\\")
 	while (!fs.existsSync(`${pathArr.join("/")}/package.json`)) { 
-		console.log(startDir)
-		console.log(pathArr)
 		if (pathArr.length >= 0) {
 			pathArr.pop()
 		}
