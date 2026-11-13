@@ -5,6 +5,7 @@
 		"outDir": "./bin",
 		"rootDir": "./src",
 		"esModuleInterop": true,
+		"allowJs": true,
 
 		"types": [],
 		"sourceMap": true,
@@ -21,5 +22,5 @@
 		"skipLibCheck": true,
 	},
 	"include": ["src/**/*", "assets/serverside_ui", "assets/clientside"],
-	"exclude": ["bin/*"],
+	"exclude": ["bin/*","assets/*"],
 }
