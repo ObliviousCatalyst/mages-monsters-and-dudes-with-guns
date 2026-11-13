@@ -1,6 +1,8 @@
 import * as user from "./users.js"
 import * as cards from "./cards.js"
 import { entityPointer } from "./pointers.js"
+import { unit } from "./cards/base.js"
+import { entities } from "../constants.js"
 
 // export class staticArray {
 // 	constructor(depth) {

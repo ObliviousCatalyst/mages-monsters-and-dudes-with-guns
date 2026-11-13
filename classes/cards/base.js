@@ -1,3 +1,4 @@
+import { entityPointer } from "../pointers.js"
 /**
  * @class
  */
