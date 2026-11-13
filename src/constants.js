@@ -16,7 +16,7 @@ export const procArgs = parseArgs({
 	args: process.argv.slice(2),
 	options: {
 		debug: { type: "boolean", short: "d"},
-		port: { type: "string" },
+		port: { type: "string", multiple: false },
 	}
 })
 
@@ -197,7 +197,8 @@ export async function getLocalIp () {
 	return (await dnsPro.lookup(os.hostname(), { family: 4 })).address
 }
 
-export function getProjectDir (startDir = path.dirname(fileURLToPath(import.meta.url))) {
+
+export function getProjectDir (startDir = import.meta.dirname) {
 	let pathArr = startDir.split("\\")
 	while (!fs.existsSync(`${pathArr.join("/")}/package.json`)) { 
 		console.log(startDir)
