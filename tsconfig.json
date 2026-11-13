@@ -21,6 +21,6 @@
 		"moduleDetection": "force",
 		"skipLibCheck": true,
 	},
-	"include": ["src/**/*", "assets/serverside_ui", "assets/clientside"],
+	"include": ["src/**/*"],
 	"exclude": ["bin/*","assets/*"],
 }
