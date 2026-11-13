@@ -2,7 +2,9 @@ import EventEmitter from "node:events"
 import fs from "node:fs"
 import os from "node:os"
 import dnsPro from "node:dns/promises"
+import path from "node:path"
 import { parseArgs } from "node:util"
+import { fileURLToPath } from "node:url"
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
@@ -18,37 +20,39 @@ export const procArgs = parseArgs({
 	}
 })
 
-export const UIDir = "clientside/ui"
+export const projectDir = getProjectDir()
+
+export const UIDir = "assets/clientside/ui"
 
 // now realizing that using fs to import assets might come back to bite me in the ass
 export const files = {
 	html: {
-		landing: fs.readFileSync(`./${UIDir}/landing.html`),
-		error: fs.readFileSync(`./${UIDir}/error.html`),
-		main: fs.readFileSync(`./${UIDir}/main.html`),
-		chat: fs.readFileSync(`./${UIDir}/chat.html`),
-		orbit: fs.readFileSync(`./${UIDir}/orbit.html`),
+		landing: fs.readFileSync(`${projectDir}/${UIDir}/landing.html`),
+		error: fs.readFileSync(`${projectDir}/${UIDir}/error.html`),
+		main: fs.readFileSync(`${projectDir}/${UIDir}/main.html`),
+		chat: fs.readFileSync(`${projectDir}/${UIDir}/chat.html`),
+		orbit: fs.readFileSync(`${projectDir}/${UIDir}/orbit.html`),
 	},
 	css: {
-		landing: fs.readFileSync(`./${UIDir}/landing.css`),
-		main: fs.readFileSync(`./${UIDir}/main.css`),
-		grid: fs.readFileSync(`./${UIDir}/grid.css`),
-		chat: fs.readFileSync(`./${UIDir}/chat.css`),
-		redOrbit: fs.readFileSync(`./${UIDir}/redOrbit.css`),
+		landing: fs.readFileSync(`${projectDir}/${UIDir}/landing.css`),
+		main: fs.readFileSync(`${projectDir}/${UIDir}/main.css`),
+		grid: fs.readFileSync(`${projectDir}/${UIDir}/grid.css`),
+		chat: fs.readFileSync(`${projectDir}/${UIDir}/chat.css`),
+		redOrbit: fs.readFileSync(`${projectDir}/${UIDir}/redOrbit.css`),
 	},
 	js: {
-		landing: fs.readFileSync(`./${UIDir}/landing.js`),
-		index: fs.readFileSync(`./${UIDir}/index.js`),
-		global: fs.readFileSync(`./${UIDir}/global.js`),
-		embeds: fs.readFileSync(`./${UIDir}/embeds.js`),
-		grid: fs.readFileSync(`./${UIDir}/grid.js`),
-		chat: fs.readFileSync(`./${UIDir}/chat.js`),
+		landing: fs.readFileSync(`${projectDir}/${UIDir}/landing.js`),
+		index: fs.readFileSync(`${projectDir}/${UIDir}/index.js`),
+		global: fs.readFileSync(`${projectDir}/${UIDir}/global.js`),
+		embeds: fs.readFileSync(`${projectDir}/${UIDir}/embeds.js`),
+		grid: fs.readFileSync(`${projectDir}/${UIDir}/grid.js`),
+		chat: fs.readFileSync(`${projectDir}/${UIDir}/chat.js`),
 	},
 	fonts: {
-		firaCode: fs.readFileSync("./fonts/Fira_Code/FiraCode-VariableFont_wght.ttf"),
+		firaCode: fs.readFileSync(`${projectDir}/assets/fonts/Fira_Code/FiraCode-VariableFont_wght.ttf`),
 	},
 	dev: {
-		debugger: fs.readFileSync(`./${UIDir}/debugger.html`),
+		debugger: fs.readFileSync(`${projectDir}/${UIDir}/debugger.html`),
 	},
 }
 
@@ -191,4 +195,17 @@ export function systemMessage (msg) {
 export async function getLocalIp () {
 	// thank god for stack overflow
 	return (await dnsPro.lookup(os.hostname(), { family: 4 })).address
+}
+
+export function getProjectDir (startDir = path.dirname(fileURLToPath(import.meta.url))) {
+	let pathArr = startDir.split("/")
+	while (!fs.existsSync("package.json")) { 
+		if (pathArr.length > 0) {
+			pathArr.pop()
+		}
+		else {
+			throw new Error("could not find project directory")
+		}
+	}
+	return pathArr.join("/")
 }
