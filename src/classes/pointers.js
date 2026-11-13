@@ -1,5 +1,5 @@
 import { unit } from "./cards/base.js"
-import { board } from "./key-objects.ts"
+import { board } from "./key-objects.js"
 
 export class entityPointer {
 	array
