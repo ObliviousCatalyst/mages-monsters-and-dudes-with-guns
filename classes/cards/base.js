@@ -12,6 +12,7 @@ export class card {
  * @extends {card}
  */
 export class unit extends card {
+	pointer = null
 	/**
 	 * @type {{
 	 * hp: number 
