@@ -21,7 +21,7 @@ function createWindow () {
 			nodeIntegration: false
 		}
 	})
-	console.log("IP:",localIP)
+	console.log("IP:", localIP)
 	let port = parseInt(procArgs.values.port)
 	if (port !== NaN) {
 		launchServer(port)
