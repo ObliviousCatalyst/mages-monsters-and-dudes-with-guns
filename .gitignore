@@ -137,3 +137,5 @@ dist
 
 # vscode config
 .vscode/
+
+bin/
