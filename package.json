@@ -1,21 +1,21 @@
 {
-  "name": "mages, monsters, and dudes with guns",
-  "version": "0.1.0",
-  "description": "",
-  "license": "UNLICENCED",
-  "author": "oblivious_catalyst",
-  "type": "module",
-  "main": ".bin/main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "npx tsc"
-  },
-  "devDependencies": {
-    "@types/node": "^26.6.6",
-    "electron": "^42.11.18",
-    "typescript": "^7.0.2"
-  },
-  "dependencies": {
-    "ws": "^8.21.0"
-  }
+	"name": "mages, monsters, and dudes with guns",
+	"version": "0.1.0",
+	"description": "",
+	"license": "UNLICENCED",
+	"author": "oblivious_catalyst",
+	"type": "module",
+	"main": "./bin/main.js",
+	"scripts": {
+		"start": "electron .",
+		"build": "npx tsc"
+	},
+	"devDependencies": {
+		"@types/node": "^26.6.6",
+		"electron": "^42.11.18",
+		"typescript": "^7.0.2"
+	},
+	"dependencies": {
+		"ws": "^8.21.0"
+	}
 }
