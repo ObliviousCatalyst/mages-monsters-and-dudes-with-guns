@@ -5,7 +5,7 @@
   "license": "UNLICENCED",
   "author": "oblivious_catalyst",
   "type": "module",
-  "main": "main.js",
+  "main": ".bin/main.js",
   "scripts": {
     "start": "electron .",
     "build": "npx tsc"
