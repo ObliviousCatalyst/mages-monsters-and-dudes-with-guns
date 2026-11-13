@@ -75,12 +75,12 @@ export class board {
 			width: width,
 		}
 		for (let pt = 0; pt < height; pt++) {
-			let row = { length: width } 
+			let column = { length: width } 
 			for (let ix = 0; ix < width; ix++) {
-				row[ix] = null
+				column[ix] = null
 			}
 
-			wip[pt] = new Proxy(row, {
+			wip[pt] = new Proxy(column, {
 				get (target, property, receiver) {
 					let intProp = parseInt(property)
 					if (intProp !== NaN) {
