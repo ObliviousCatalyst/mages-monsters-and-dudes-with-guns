@@ -1,4 +1,5 @@
 import { unit } from "./cards/base.js"
+import { board } from "./key-objects.ts"
 
 export class entityPointer {
 	array
@@ -10,12 +11,13 @@ export class entityPointer {
 	expectedX
 	expectedY
 	/**
+	 * @param {board} board 
 	 * @param {any[]} array 
 	 * @param {number} index 
 	 * @param {number} expectedX 
 	 * @param {number} expectedY 
 	 */
-	constructor (array, index, expectedX, expectedY) {
+	constructor (board ,array, index, expectedX = null, expectedY = null) {
 		this.array = array
 		this.index = index
 		this.expectedX = expectedX
