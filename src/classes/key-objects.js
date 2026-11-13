@@ -172,7 +172,7 @@ export class board {
 	 * @param {entityPointer} ptr 
 	 */
 	searchForPointer (ptr) {
-		for (let pt = 0; pt < this.width ) {
+		for (let pt = 0; pt < this.width; pt++) {
 
 		}
 		Object.entries()
