@@ -7,9 +7,10 @@
 	"type": "module",
 	"main": "./bin/main.js",
 	"scripts": {
-		"start": "electron .",
+		"start": "electron ./bin/main.js",
 		"build": "npx tsc",
-		"clean": "node cleaner.js"
+		"clean": "node cleaner.js",
+		"install": "node install.js"
 	},
 	"devDependencies": {
 		"@types/node": "^26.6.6",
