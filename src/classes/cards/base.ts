@@ -2,9 +2,20 @@ import { entityPointer } from "../pointers.js"
 /**
  * @class
  */
-export class card {
-	name
-	assets = {}
+export abstract class card {
+	name: string | null = null
+	assets = new class Assets {
+		[key: string]: string
+	}
+	reference: entityPointer | null = null
+
+	assignRef (ptr: entityPointer) {
+		if (this.reference = null) {
+			this.reference = ptr
+			return
+		}
+
+	}
 }
 
 /**
@@ -13,10 +24,6 @@ export class card {
  * @extends {card}
  */
 export class unit extends card {
-	/**
-	 * @type {entityPointer}
-	 */
-	pointer = null
 	/**
 	 * @type {{
 	 * hp: number 
@@ -35,7 +42,7 @@ export class unit extends card {
 		stamina: 10,
 		slots: 2,
 	}
-	actions = []
+	actions: unitAction[] = []
 	cost = {
 		food: 1,
 		metal: 1,
@@ -55,11 +62,15 @@ export class unit extends card {
  */
 export class StdUnit extends unit {
 	constructor () {
+		super()
 		this.actions.push(new unitAction("move","move this unit", {
 			target: "none", 
+			category: "mobility",
 			movement: "standard", 
-			movementDist: "speed"
-		}, () => {	
+			movementDist: "speed",
+		}, (x: number, y: number) => {
+			// reminder to run checks to limit player movement
+			this.reference?.move(x,y)	
 		}))
 	}
 }
@@ -75,27 +86,28 @@ export class item extends card {
 export class orbital extends card {
 	
 }
+
+export interface UnitActionMeta {
+	target: "none" | "self" | "ally" | "opponent" | "allyOrbit" | "oppOrbit" | "allyStasis" | "oppStasis" | "tile" | "world"
+	category: "mobility" | "attack" | "support" | "other"
+	movement?: "none" | "standard" | "linear" | "rush" | "recoil" | "teleport"
+	movementDist?: "speed" | "implicit" | number
+	power?: number
+	damageSrc?: "atk" | "alt" | "fixed"
+	damageTypePrime?: "neutral" | "blunt" | "slashing" | "piercing" | "blast" | "energy" | "arcana"
+	damageTypeSec?: "neutral" | "heat" | "cold" | "water" | "electric" | "psychic" | "rads"
+}
+
 /**
  * an action that a unit can take to affect themselves, another unit, or the world
  * @class
  */
 export class unitAction {
-	name
-	description
-	method
-
-	/**
-	 * @typedef {object} unitActionMeta
-	 * @property {"none" | "self" | "ally" | "opponent" | "allyOrbit" | "oppOrbit" | "allyStasis" | "oppStasis" | "tile" | "world"} target 
-	 * @property {"mobility" | "attack" | "support" | "other"} category
-	 * @property {"none" | "standard" | "linear" | "rush" | "recoil" | "teleport"} [movement]
-	 * @property {"speed" | "implicit" | number} [movementDist]
-	 * @property {number} [power]
-	 * @property {"atk" | "alt" | "fixed"} [damageSrc]
-	 * @property {"neutral" | "blunt" | "slashing" | "piercing" | "blast" | "energy" | "arcana"} [damageTypePrime]
-	 * @property {"neutral" | "heat" | "cold" | "water" | "electric" | "psychic" | "rads"} [damageTypeSec]
-	 */
-
+	name: string
+	description: string
+	meta: UnitActionMeta
+	method: Function
+	
 	/**
 	 * create a new unit action
 	 * @param {string} name 
@@ -103,7 +115,7 @@ export class unitAction {
 	 * @param {unitActionMeta} meta
 	 * @param {function (...): void} method  
 	 */
-	constructor (name,description,meta,method) {
+	constructor (name: string, description: string, meta: UnitActionMeta, method: Function) {
 		this.name = name
 		this.description = description
 		this.meta = meta
