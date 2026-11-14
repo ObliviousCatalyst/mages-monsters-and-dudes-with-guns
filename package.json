@@ -15,10 +15,10 @@
 	"devDependencies": {
 		"@types/node": "^26.6.6",
 		"electron": "^42.11.18",
-		"tsc": "^2.0.4",
 		"typescript": "^7.0.2"
 	},
 	"dependencies": {
+		"typecript": "^0.0.1-security",
 		"ws": "^8.23.0"
 	}
 }
