@@ -4,7 +4,6 @@ import os from "node:os"
 import dnsPro from "node:dns/promises"
 import path from "node:path"
 import { parseArgs } from "node:util"
-import { fileURLToPath } from "node:url"
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"

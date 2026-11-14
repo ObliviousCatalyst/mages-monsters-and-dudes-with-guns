@@ -2,55 +2,8 @@ import * as user from "./users.js"
 import * as cards from "./cards.js"
 import { entityPointer } from "./pointers.js"
 import { orbital, unit } from "./cards/base.js"
-import { entities } from "../constants.js"
 
 type Constructor <T = any> = new (...args: any[]) => T
-
-// export class staticArray {
-// 	constructor(depth) {
-// 		for(let pt = 0; pt < depth -1; pt++) {
-// 			this[pt] = undefined;
-// 		}
-// 	}
-// }
-
-// export class staticMatrix {
-// 	constructor(x,y) {
-// 		for(let pt = 0; pt < x -1; pt++) {
-// 			this[pt] = new staticArray(y);
-// 		}
-// 	}
-// }
-
-// export class deck {
-// 	constructor(json,team,type) {
-// 		this.array = json[type].array
-// 		this.shuffle()
-// 	}
-
-// 	shuffle() {
-// 		let mem = this.array;
-// 		this.array = [];
-// 		while(mem.length > 0) {
-// 			let pt = Math.floor(Math.random()*mem.length)
-// 			this.array.push(mem[pt])
-// 			mem[pt] = undefined;
-// 			for(let pt1 = pt; pt1 < mem.length; pt1++) {
-// 				mem[pt1] = mem[pt1+1]
-// 			}
-// 			mem.pop()
-// 		}
-// 		console.log(`${this.team}'s ${this.type} deck was shuffled`)
-// 	}
-// }
-
-// class hand {
-// 	contents = [];
-
-// 	draw() {
-
-// 	}
-// }
 
 export class userlist {
 	spectators: user.spectator[] = []
@@ -101,40 +54,7 @@ export class board {
 				column[ix] = null
 			}
 			this[pt] = column
-
-	// 		wip[pt] = new Proxy(column, {
-	// 			get (target, property: string, receiver) {
-	// 				let intProp = parseInt(property)
-	// 				if (!Number.isNaN(intProp)) {
-	// 					if (intProp >= 0 && intProp < width) {
-	// 						return Reflect.get(target,property,receiver)
-	// 					}
-	// 					throw new RangeError("attempted to get item outside of board bounds")
-	// 				}
-	// 				return Reflect.get(target, property, receiver)
-	// 			},
-
-	// 			set (target, property, value, receiver) {
-	// 				return Reflect.set(target, property, value, receiver)
-	// 			}
-	// 		})
 		}
-	// 	return new Proxy(wip, {
-	// 		get (target, property, receiver) {
-	// 			let intProp = parseInt(property)
-	// 			if (intProp !== NaN) {
-	// 				if (intProp >= 0 && intProp < height) {
-	// 					return Reflect.get(target, property, receiver)
-	// 				}
-	// 				throw new RangeError("attempted to get item outside of board bounds")
-	// 			}
-	// 			return Reflect.get(target, property, receiver)
-	// 		},
-
-	// 		set (target, property, value, receiver) {
-	// 			return Reflect.set(target, property, value, receiver)
-	// 		}
-	// 	})
 	}
 
 	/**
@@ -149,33 +69,17 @@ export class board {
 	}
 
 	/**
-	 * create an new pointer at selected point
-	 * @param {number} reference 
-	 * @param {...number} position 
-	 */
-	createPointer (reference: number, ...position: number[]) {
-		// initial checks
-		let TErr = new TypeError("all arguments of createPointer() must be integers")
-		if (!Number.isInteger(reference)) throw TErr
-		position.forEach(item => {
-			if (!Number.isInteger(item)) throw TErr
-		})
-	}
-
-	/**
 	 * move a pointer to another location in this board
 	 * @param {number[]} target 
 	 * @param {number[]} destination 
 	 */
 	movePointer (target: [number, number], destination: [number, number]) {
 		// initial checks
-		let TErr = new TypeError("all parameters of movePointer() must be arrays of integers")
-		if (typeof target !== "object" || typeof destination !== "object") throw TErr
-		if (!Array.isArray(target) || !Array.isArray(destination)) throw TErr;
+		let TErr = new TypeError("all parameters of movePointer() must be arrays of integers"); // loadbearing semicolon, DO NOT REMOVE
+		
 		[target[0],target[1],destination[0],destination[1]].forEach(element => {
-			if (typeof element !== "number") throw TErr
 			if (!Number.isInteger(element)) throw TErr
-		});
+		})
 	
 		// main logic
 		this[destination[0]]![destination[1]] = this[target[0]]![target[1]]
@@ -198,34 +102,11 @@ export class board {
 	}
 
 	/**
-	 * transfer a pointer to another object
-	 * @param {[number, number]} target 
-	 * @param {[object, ...]} destination 
+	 * add a unit to the board
 	 */
-	// transferPointer (target, destination) {
-	// 	// initial checks
-	// 	let TErr = new TypeError("parameters of transfer pointer must be arrays")
-	// 	if (typeof target !== "object" || typeof destination !== "object") throw TErr
-	// 	if (!Array.isArray(target) || !Array.isArray(destination)) throw TErr
-	// 	target.forEach(item => {
-	// 		let err = new TypeError("target must be an array of integers")
-	// 		if (typeof item !== "number") throw err
-	// 		if (!Number.isInteger(item)) throw err
-	// 	})
-	// 	if (typeof destination[0] !== "object") throw new TypeError("destination[0] must be an object/array")
-		
-	// 	// main logic
-
-	// }
-
-	/**
-	 * transfer pointer form another object
-	 * @param {[object, ...]} target 
-	 * @param {[number, number]} destination
-	 */
-	// transferPointerFrom (target,destination) {
-
-	// }
+	addUnit (x: number, y: number, source: Constructor, args: any[]) {
+		this[x]![y] = this.entities.spawnUnit(this, source, x, y, args)
+	}
 
 	/**
 	 * move a unit
@@ -266,7 +147,7 @@ export class entityList {
 	 * @param {...*} args 
 	 * @returns {entityPointer}
 	 */
-	spawnOrbital (board: board, source: Constructor, ...args: any[]) {
+	spawnOrbital (board: board, source: Constructor, ...args: any[]): entityPointer {
 		if (!(source.prototype instanceof cards.base.orbital)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.orbit")
 		let index = this.orbitals.push(new source(...args))
 		index--
