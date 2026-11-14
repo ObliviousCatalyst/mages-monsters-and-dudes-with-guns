@@ -6,11 +6,12 @@
 		"rootDir": "./src",
 		"esModuleInterop": true,
 		"allowJs": true,
+		"sourceMap": false,
+		"declarationMap": false,
+		"declaration": false,
+		"removeComments": true,
 
 		"types": [],
-		"sourceMap": true,
-		"declaration": true,
-		"declarationMap": true,// Stricter Typechecking Options
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,// Recommended Options
 		"strict": true,
