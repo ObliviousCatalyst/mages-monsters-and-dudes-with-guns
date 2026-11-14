@@ -1,5 +1,5 @@
 import { styleText } from "node:util"
-import { exec, execSync } from "node:child_process"
+import { execSync } from "node:child_process"
 
 function textGen (text) {
 	return styleText(["white","bold"], text)
