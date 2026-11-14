@@ -14,9 +14,10 @@
 	"devDependencies": {
 		"@types/node": "^26.6.6",
 		"electron": "^42.11.18",
+		"tsc": "^2.0.4",
 		"typescript": "^7.0.2"
 	},
 	"dependencies": {
-		"ws": "^8.21.0"
+		"ws": "^8.23.0"
 	}
 }
