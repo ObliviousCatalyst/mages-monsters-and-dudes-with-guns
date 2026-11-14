@@ -72,9 +72,9 @@ export const chatlogs = [["System", "server started", "yellow"]]
 
 export const users = new keyClass.userlist()
 
-export const board = new keyClass.board(7, 7)
-
 export const entities = new keyClass.entityList()
+
+export const board = new keyClass.board(7, 7, entities)
 
 /**
  * @class

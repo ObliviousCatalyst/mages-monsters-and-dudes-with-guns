@@ -23,5 +23,15 @@ export class entityPointer {
 		this.expectedX = expectedX
 		this.expectedY = expectedY
 		this.actualReference = array[index]
+		this.board = board
+	}
+
+	/**
+	 * politely ask the board to move me
+	 * @param {number} x 
+	 * @param {number} y 
+	 */
+	move (x, y) {
+		this.board.moveUnit(this,x,y)
 	}
 }

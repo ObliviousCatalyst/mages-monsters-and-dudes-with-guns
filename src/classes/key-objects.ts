@@ -40,13 +40,15 @@ export class board {
 	[key: number]: boardColumn
 	width: number
 	height: number
+	entities: entityList
 	/**
 	 * @param {number} width 
 	 * @param {number} height 
 	 */
-	constructor (height = 1, width = 1) {
+	constructor (height: number = 1, width: number = 1, entList: entityList) {
 		this.height = height
 		this.width = width
+		this.entities = entList
 		
 		for (let pt: number = 0; pt < height; pt++) {
 			let column = new boardColumn(width) 
