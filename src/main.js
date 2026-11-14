@@ -23,7 +23,7 @@ function createWindow () {
 	})
 	console.log("IP:", localIP)
 	let port = parseInt(procArgs.values.port)
-	if (port !== NaN) {
+	if (!isNaN(port)) {
 		launchServer(port)
 		win.loadFile(`${projectDir}/assets/serverside_ui/control panel.html`)
 		return
