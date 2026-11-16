@@ -8,8 +8,8 @@ export class gordon extends StdUnit {
 
 		// stats
 		this.stats.hp = 200
-		this.stats.atk = 80
-		this.stats.alt = 0
+		this.stats.atk = 50
+		this.stats.alt = 80
 		this.stats.speed = 2
 		this.stats.stamina = 3
 		this.stats.slots = 4
