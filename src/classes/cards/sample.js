@@ -3,7 +3,6 @@ import { card, unit, actionCard, item, StdUnit, unitAction } from "./base.js"
 export class gordon extends StdUnit {
 	constructor () {
 		// types
-		this.size = "macro"
 		this.tier = "A"
 		this.faction = "black mesa"
 
