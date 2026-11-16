@@ -21,7 +21,7 @@ export class gordon extends StdUnit {
 		this.assets.icon = "gordon.jpg"
 
 		// advanced
-		this.actions.push(new unitAction("kick", "self eplanetory", {
+		this.actions.push(new unitAction("kick", "self explanatory", {
 			target: "opponent",
 			movement: "none",
 			movementDist: "implicit",
