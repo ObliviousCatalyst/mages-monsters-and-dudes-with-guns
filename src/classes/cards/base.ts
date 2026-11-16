@@ -18,6 +18,21 @@ export abstract class card {
 	}
 }
 
+export interface UnitStats {
+	hp: number
+	atk: number
+	alt: number
+	speed: number
+	stamina: number
+	slots: number
+}
+
+export interface UnitCost {
+	food?: number
+	metal?: number
+	mana?: number
+}
+
 /**
  * minimal unit base
  * @class
@@ -34,7 +49,7 @@ export class unit extends card {
 	 * slots: number
 	 * }}
 	*/
-	stats = {
+	stats: UnitStats = {
 		hp: 100,
 		atk: 20,
 		alt: 20,
@@ -43,7 +58,7 @@ export class unit extends card {
 		slots: 2,
 	}
 	actions: unitAction[] = []
-	cost = {
+	cost: UnitCost = {
 		food: 1,
 		metal: 1,
 		mana: 1,
@@ -52,7 +67,7 @@ export class unit extends card {
 		strong: [],
 		weak: [],
 	}
-	faction = "none"
+	faction: string = "none"
 }
 
 /**
