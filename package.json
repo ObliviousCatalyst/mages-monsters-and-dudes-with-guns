@@ -18,7 +18,6 @@
 		"typescript": "^7.0.2"
 	},
 	"dependencies": {
-		"typescript": "^0.0.1-security",
 		"ws": "^8.23.0"
 	}
 }
