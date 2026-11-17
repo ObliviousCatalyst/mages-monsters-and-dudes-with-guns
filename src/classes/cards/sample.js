@@ -1,6 +1,6 @@
-import { card, unit, actionCard, item, StdUnit, unitAction } from "./base.js"
+import { Card, Unit, ActionCard, Item, StdUnit, UnitAction } from "./base.js"
 
-export class gordon extends StdUnit {
+export class Gordon extends StdUnit {
 	constructor () {
 		// types
 		this.tier = "A"
@@ -21,7 +21,7 @@ export class gordon extends StdUnit {
 		this.assets.icon = "gordon.jpg"
 
 		// advanced
-		this.actions.push(new unitAction("kick", "self explanatory", {
+		this.actions.push(new UnitAction("kick", "self explanatory", {
 			target: "opponent",
 			movement: "none",
 			movementDist: "implicit",

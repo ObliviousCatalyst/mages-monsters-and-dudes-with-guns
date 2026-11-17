@@ -103,7 +103,7 @@ export const globalUpdate = new class extends EventEmitter {
  * @emits globalUpdate#game-update
  */
 export function spawnGordon () {
-	board[5]![5] = entities.spawnUnit(board,cards.gordon,5,5)
+	board[5]![5] = entities.spawnUnit(board, cards.Gordon, 5, 5)
 	globalUpdate.emit("game-update")
 }
 

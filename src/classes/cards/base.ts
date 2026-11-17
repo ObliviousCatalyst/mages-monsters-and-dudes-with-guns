@@ -2,7 +2,7 @@ import { entityPointer } from "../pointers.js"
 /**
  * @class
  */
-export abstract class card {
+export abstract class Card {
 	name: string | null = null
 	assets = new class Assets {
 		[key: string]: string
@@ -36,9 +36,9 @@ export interface UnitCost {
 /**
  * minimal unit base
  * @class
- * @extends {card}
+ * @extends {Card}
  */
-export class unit extends card {
+export class Unit extends Card {
 	/**
 	 * @type {{
 	 * hp: number 
@@ -57,7 +57,7 @@ export class unit extends card {
 		stamina: 10,
 		slots: 2,
 	}
-	actions: unitAction[] = []
+	actions: UnitAction[] = []
 	cost: UnitCost = {
 		food: 1,
 		metal: 1,
@@ -73,12 +73,12 @@ export class unit extends card {
 /**
  * standard unit base
  * @class 
- * @extends {unit}
+ * @extends {Unit}
  */
-export class StdUnit extends unit {
+export class StdUnit extends Unit {
 	constructor () {
 		super()
-		this.actions.push(new unitAction("move","move this unit", {
+		this.actions.push(new UnitAction("move","move this unit", {
 			target: "none", 
 			category: "mobility",
 			movement: "standard", 
@@ -90,15 +90,15 @@ export class StdUnit extends unit {
 	}
 }
 
-export class actionCard extends card {
+export class ActionCard extends Card {
 	
 }
 
-export class item extends card {
+export class Item extends Card {
 	
 }
 
-export class orbital extends card {
+export class Orbital extends Card {
 	
 }
 
@@ -117,7 +117,7 @@ export interface UnitActionMeta {
  * an action that a unit can take to affect themselves, another unit, or the world
  * @class
  */
-export class unitAction {
+export class UnitAction {
 	name: string
 	description: string
 	meta: UnitActionMeta
