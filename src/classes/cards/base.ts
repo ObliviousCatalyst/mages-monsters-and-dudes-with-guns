@@ -1,21 +1,24 @@
 import { entityPointer } from "../pointers.js"
-/**
- * @class
- */
-export abstract class Card {
-	name: string | null = null
-	assets = new class Assets {
-		[key: string]: string
-	}
-	reference: entityPointer | null = null
 
-	assignRef (ptr: entityPointer) {
-		if (this.reference = null) {
-			this.reference = ptr
-			return
-		}
+export enum DamageType {
+	// primary
+	neutral,
+	energy,
+	blunt,
+	slashing,
+	piercing,
+	blast,
+	arcana,
 
-	}
+	// secondary
+	heat,
+	cold,
+	water,
+	electric,
+	psychic,
+	rads,
+	necrotic,
+	sonic,
 }
 
 export interface UnitStats {
@@ -31,6 +34,27 @@ export interface UnitCost {
 	food?: number
 	metal?: number
 	mana?: number
+}
+
+export interface UnitTypeAdv {
+	strong: DamageType[]
+	weak: DamageType[]
+}
+
+export abstract class Card {
+	name: string | null = null
+	assets = new class Assets {
+		[key: string]: string
+	}
+	reference: entityPointer | null = null
+
+	assignRef (ptr: entityPointer) {
+		if (this.reference = null) {
+			this.reference = ptr
+			return
+		}
+
+	}
 }
 
 /**
@@ -63,7 +87,7 @@ export class Unit extends Card {
 		metal: 1,
 		mana: 1,
 	}
-	advantage = {
+	advantage: UnitTypeAdv = {
 		strong: [],
 		weak: [],
 	}
