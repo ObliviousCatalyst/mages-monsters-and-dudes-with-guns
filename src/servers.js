@@ -5,7 +5,7 @@ import os from "node:os"
 import path from "node:path"
 
 import { ipcMain } from "electron"
-import { WebSocketServer as wssv } from "ws"
+import { WebSocketServer } from "ws"
 
 import { 
 	files, mimeTypes, hostIP, chatlogs, users,
@@ -16,9 +16,9 @@ import {
 export const server = http.createServer();
 
 export const sockets = {
-	public: new wssv({ noServer: true }),
-	red: new wssv({ noServer: true }),
-	blue: new wssv({ noServer: true }),
+	public: new WebSocketServer({ noServer: true }),
+	red: new WebSocketServer({ noServer: true }),
+	blue: new WebSocketServer({ noServer: true }),
 }
 
 
@@ -79,7 +79,7 @@ export function launchServer (port) {
 					console.log("requested to create a user that already exists")
 				}
 
-				if (checkExistence(req.socket.remoteAddress,splitPath[1])) {
+				if (checkExistence(req.socket.remoteAddress, splitPath[1])) {
 					console.log("1st")
 					fail()
 					break;
@@ -87,9 +87,9 @@ export function launchServer (port) {
 
 				if(splitPath[2] === "spectator") {
 					console.log("adding spectator")
-					users.addSpectator(splitPath[1],req.socket.remoteAddress)
+					users.addSpectator(splitPath[1], req.socket.remoteAddress)
 					
-					console.log("users: ",users)
+					console.log("users: ", users)
 					console.log("spectators: ", users.spectators)
 					for (let pt = 0; pt < users.spectators.length; pt++) console.log(`spectator[${pt}]`,users.spectators[pt])
 					res.statusCode = 201
@@ -104,14 +104,14 @@ export function launchServer (port) {
 
 				console.log("case was not broken")
 				
-				users.addPlayer(splitPath[1],req.socket.remoteAddress,splitPath[2])
+				users.addPlayer(splitPath[1], req.socket.remoteAddress,splitPath[2])
 				res.statusCode = 201
 				systemMessage(`user: "${splitPath[1]}" joined the game`)
 			}break;
 
 			case "images":
-				let imgPath = path.join(__dirname,url.pathname)
-				if (!imgPath.startsWith(path.join(__dirname,"images"))) {
+				let imgPath = path.join(__dirname, url.pathname)
+				if (!imgPath.startsWith(path.join(__dirname, "images"))) {
 					res.statusCode = 403
 					break
 				}
@@ -136,7 +136,7 @@ export function launchServer (port) {
 
 	/***** WEBSOCKET HANDLER *****/
 	/***/
-	sockets.public.on("connection", (ws,req) => {
+	sockets.public.on("connection", (ws, req) => {
 		console.log("connected to public socket")
 		function writeMessage(type, subtype, data) {
 			return JSON.stringify({
@@ -146,11 +146,11 @@ export function launchServer (port) {
 			})
 		}
 		
-		let initChat = writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update"))
+		let initChat = writeMessage("update", "chatlogs", chatlogs)
 		ws.send(initChat)
 		
 		globalUpdate.addListener("update-chat", () => {
-			ws.send(writeMessage("update", "chatlogs", chatlogs, () => console.log("generated chatlog update")))
+			ws.send(writeMessage("update", "chatlogs", chatlogs))
 		}) 
 
 		globalUpdate.on("update-game", () => {
@@ -187,12 +187,12 @@ export function launchServer (port) {
 		})
 	})
 
-	server.on("upgrade", (req,sock,head) => {
+	server.on("upgrade", (req, sock, head) => {
 		let { pathname } = url.parse(req.url)
 		let path = pathname.split("/")
 		switch(path[1]) {
 			case "public":
-				sockets.public.handleUpgrade(req,sock,head, (ws) => {
+				sockets.public.handleUpgrade(req, sock, head, (ws) => {
 					sockets.public.emit("connection", ws, req)
 				})
 			break;
