@@ -2,3 +2,4 @@
 - dependency version tester
 - client/server game state communication
 - system to find YOUR IP address
+- function to put character icons on the board
