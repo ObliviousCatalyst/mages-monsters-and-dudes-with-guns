@@ -116,7 +116,7 @@ export class board {
 	 * @param  {...number} destination 
 	 */
 	moveUnit (obj: entityPointer, ...destination: [number, number]) {
-		if (this[obj.expectedX]![obj.expectedY] !== obj) {
+		if (this[obj.expectedX ?? 0]![obj.expectedY ?? 0] !== obj) {
 			let corrected = this.searchForPointer(obj)
 			if (corrected === null) throw new Error("could not find pointer")
 			obj.expectedX = corrected[0]
