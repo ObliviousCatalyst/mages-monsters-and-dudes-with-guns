@@ -1,8 +1,11 @@
 class user {
+	[key: string]: any
+	username: string
+	ip: string
 	perms = {
 		chat: true
 	}
-	constructor(username,ip){
+	constructor(username: string, ip: string){
 		this.username = username
 		this.ip = ip
 	}
@@ -15,7 +18,7 @@ export class spectator extends user {
 		commands: ["basic"]
 	}
 		
-	constructor(username,ip){
+	constructor(username: string, ip: string){
 		super(username,ip)
 		
 	}
@@ -27,11 +30,11 @@ export class player extends user {
 		fetch: ["public", "self"],
 		commands: ["basic","advanced"]
 	}
-	constructor(username,ip){
+	constructor(username: string, ip: string){
 		super(username,ip);
-		this.status = {}
-		this.units = {}
-		this.hand = {}
-		this.deck = {}
+		// this.status = {}
+		// this.units = {}
+		// this.hand = {}
+		// this.deck = {}
 	}
 }

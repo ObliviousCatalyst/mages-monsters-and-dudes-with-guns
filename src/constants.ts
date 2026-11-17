@@ -7,6 +7,7 @@ import { parseArgs } from "node:util"
 
 import * as keyClass from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
+import type { player } from "./classes/users.js"
 
 /***** SETUP *****/
 /***/
@@ -102,7 +103,7 @@ export const globalUpdate = new class extends EventEmitter {
  * @emits globalUpdate#game-update
  */
 export function spawnGordon () {
-	board[5][5] = entities.spawnUnit(cards.gordon)
+	board[5]![5] = entities.spawnUnit(board,cards.gordon,5,5)
 	globalUpdate.emit("game-update")
 }
 
@@ -115,15 +116,15 @@ export function spawnGordon () {
  * @param {string} username 
  * @returns {boolean}
  */
-export function checkExistence (ip, username) {
-	function checkProperty (key, value) {
+export function checkExistence (ip: string, username: string) {
+	function checkProperty (key: string, value: string) {
 		let playerEmpty = false
 		let specEmpty = false
 		if ([users.players.red, users.players.blue].every((input) => typeof input === "undefined")) { 
 			playerEmpty = true 
 			console.log("set player empty")
 		}
-		if (users.spectators == []) { 
+		if (users.spectators.length = 0) { 
 			specEmpty = true 
 			console.log("set spec empty")
 		}
@@ -131,14 +132,14 @@ export function checkExistence (ip, username) {
 			console.log("both empty")
 			return false
 		}
-		if (value === users.players.red[key] || value === users.players.blue[key]) {
+		if (value === users?.players?.red?.[key] || value === users?.players?.blue?.[key]) {
 			console.log("match player")
 			return true
 		}
 		console.log("spectator count:",users.spectators.length)
 		for (let pt = 0; pt < users.spectators.length; pt++) {
 			console.log(`checked spec ${pt}`)
-			if (value === users.spectators[pt][key]) {
+			if (value === users?.spectators?.[pt]?.[key]) {
 				console.log("match spec")
 				return true
 			}
@@ -152,7 +153,7 @@ export function checkExistence (ip, username) {
 			return true
 		}
 	}
-	if (checkProperty("ip",ip)) {
+	if (checkProperty("ip", ip)) {
 		return true
 	}
 	return false
@@ -163,15 +164,15 @@ export function checkExistence (ip, username) {
  * @param {string} ip 
  * @returns {string}
  */
-export function checkIP (ip) {
-	if (ip === users.players.red.ip) {
+export function checkIP (ip: string) {
+	if (ip === users?.players?.red?.ip) {
 		return "player:red"
 	}
-	if (ip === users.players.blue.ip) {
+	if (ip === users?.players?.blue?.ip) {
 		return "player:blue"
 	}
-	for (let pt = 0; pt < users.spectators; pt++) {
-		if (ip === users.spectators[pt].ip) {
+	for (let pt = 0; pt < users.spectators.length; pt++) {
+		if (ip === users?.spectators?.[pt]?.ip) {
 			return `spectator:${pt}`
 		}
 	}
@@ -183,7 +184,7 @@ export function checkIP (ip) {
  * @param {string} msg 
  * @emits globalUpdate#chat-update
  */
-export function systemMessage (msg) {
+export function systemMessage (msg: string) {
 	chatlogs.push(["System", msg, "yellow"])
 	globalUpdate.emit("chat-update")
 } 
