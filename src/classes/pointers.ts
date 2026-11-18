@@ -1,5 +1,5 @@
-import { Card, Unit } from "./cards/base.js"
-import { board } from "./key-objects.js"
+import type { Card, Unit } from "./cards/base.js"
+import type { Board } from "./key-objects.js"
 
 export class entityPointer {
 	array
@@ -10,7 +10,7 @@ export class entityPointer {
 	actualReference: Card
 	expectedX: number | null
 	expectedY: number | null
-	board: board
+	board: Board
 	/**
 	 * @param {board} board 
 	 * @param {card[]} array 
@@ -18,7 +18,7 @@ export class entityPointer {
 	 * @param {number} expectedX 
 	 * @param {number} expectedY 
 	 */
-	constructor (board: board , array: Card[], index: number, expectedX: number | null = null, expectedY: number | null = null) {
+	constructor (board: Board , array: Card[], index: number, expectedX: number | null = null, expectedY: number | null = null) {
 		this.array = array
 		this.index = index
 		this.expectedX = expectedX

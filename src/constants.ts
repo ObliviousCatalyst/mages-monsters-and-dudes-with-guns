@@ -2,12 +2,11 @@ import EventEmitter from "node:events"
 import fs from "node:fs"
 import os from "node:os"
 import dnsPro from "node:dns/promises"
-import path from "node:path"
+//import path from "node:path"
 import { parseArgs } from "node:util"
 
-import * as keyClass from "./classes/key-objects.js"
+import { Board, entityList, Userlist } from "./classes/key-objects.js"
 import * as cards from "./classes/cards.js"
-import type { player } from "./classes/users.js"
 
 /***** SETUP *****/
 /***/
@@ -71,11 +70,11 @@ export const localIP = await getLocalIp()
 export const hostIP = "0.0.0.0";
 export const chatlogs = [["System", "server started", "yellow"]]
 
-export const users = new keyClass.userlist()
+export const users = new Userlist()
 
-export const entities = new keyClass.entityList()
+export const entities = new entityList()
 
-export const board = new keyClass.board(7, 7, entities)
+export const board = new Board(7, 7, entities)
 
 /**
  * @class

@@ -1,4 +1,4 @@
-class user {
+class User {
 	[key: string]: any
 	username: string
 	ip: string
@@ -11,7 +11,7 @@ class user {
 	}
 }
 
-export class spectator extends user {
+export class Spectator extends User {
 	perms = {
 		chat: true,
 		fetch: ["public", "self"],
@@ -24,7 +24,7 @@ export class spectator extends user {
 	}
 }
 
-export class player extends user {
+export class Player extends User {
 	perms = {
 		chat: true,
 		fetch: ["public", "self"],

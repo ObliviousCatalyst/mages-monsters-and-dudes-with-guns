@@ -1,4 +1,4 @@
-import { entityPointer } from "../pointers.js"
+import type { entityPointer } from "../pointers.js"
 
 export enum DamageType {
 	// primary

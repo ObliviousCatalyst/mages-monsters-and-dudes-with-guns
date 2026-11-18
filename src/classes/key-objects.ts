@@ -1,29 +1,28 @@
-import * as user from "./users.js"
+import { Spectator, Player } from "./users.js"
 import * as cards from "./cards.js"
 import { entityPointer } from "./pointers.js"
 import { Orbital, Unit } from "./cards/base.js"
 
 type Constructor <T = any> = new (...args: any[]) => T
 
-export class userlist {
-	spectators: user.spectator[] = []
+export class Userlist {
+	spectators: Spectator[] = []
 	players = new class { 
-		[key: string]: user.player | null | undefined
-
-		red: user.player | null = null
-		blue: user.player | null = null
+		[key: string]: Player | null | undefined
+		red: Player | null = null
+		blue: Player | null = null
 	}
 
 	addSpectator (username: string, ip: string) {
-		this.spectators.push(new user.spectator(username,ip))
+		this.spectators.push(new Spectator(username,ip))
 	}
 
 	addPlayer (username: string, ip: string, team: string) {
-		this.players[team] = new user.player(username,ip)
+		this.players[team] = new Player(username,ip)
 	}
 }
 
-export class boardColumn {
+export class BoardColumn {
 	[key: number]: any
 	length: number
 	constructor (len: number) {
@@ -36,8 +35,8 @@ export class boardColumn {
  * @property {number} width
  * @property {number} height
  */
-export class board {
-	[key: number]: boardColumn
+export class Board {
+	[key: number]: BoardColumn
 	width: number
 	height: number
 	entities: entityList
@@ -51,7 +50,7 @@ export class board {
 		this.entities = entList
 		
 		for (let pt: number = 0; pt < height; pt++) {
-			let column = new boardColumn(width) 
+			let column = new BoardColumn(width) 
 			for (let ix: number = 0; ix < width; ix++) {
 				column[ix] = null
 			}
@@ -136,7 +135,7 @@ export class entityList {
 	 * @param {...*} args 
 	 * @returns {entityPointer}
 	 */
-	spawnUnit (board: board, source: Constructor, x: number, y: number, ...args: any[]) : entityPointer {
+	spawnUnit (board: Board, source: Constructor, x: number, y: number, ...args: any[]) : entityPointer {
 		if (!(source.prototype instanceof cards.base.Unit)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.unit")
 		let index = this.units.push(new source(...args))
 		index--
@@ -149,7 +148,7 @@ export class entityList {
 	 * @param {...*} args 
 	 * @returns {entityPointer}
 	 */
-	spawnOrbital (board: board, source: Constructor, ...args: any[]): entityPointer {
+	spawnOrbital (board: Board, source: Constructor, ...args: any[]): entityPointer {
 		if (!(source.prototype instanceof cards.base.Orbital)) throw new TypeError("param source of spawnUnit() must be a class that inherits from cards.base.orbit")
 		let index = this.orbitals.push(new source(...args))
 		index--
